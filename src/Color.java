@@ -7,11 +7,10 @@ public class Color {
     private final int DEFAULT_ALPHA = 70;
     private int alpha;
     private PApplet sketch;
-    // private int baseColor;
 
     /**
-     * Color constructor takes PApplet object Initializes object with a random base
-     * color and default transparency
+     * Color constructor takes PApplet object Initializes object with a default
+     * transparency
      * 
      * @param sketch
      */
@@ -35,7 +34,7 @@ public class Color {
      * 
      * @return rgb as integer value
      */
-    public int coolColor() {
+    public int randomCoolColor() {
         return this.sketch.color(0, sketch.random(32, 220), sketch.random(140, 255), alpha);
     }
 
@@ -45,7 +44,7 @@ public class Color {
      * 
      * @return rgb as integer value
      */
-    public int warmColor() {
+    public int randomWarmColor() {
         return this.sketch.color(sketch.random(140, 255), sketch.random(32, 220), 0, alpha);
     }
 }

@@ -19,7 +19,6 @@ public class Motion {
             return x - DISTANCE;
         else
             return x + DISTANCE;
-
     }
 
     /**
