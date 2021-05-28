@@ -1,19 +1,17 @@
 import processing.core.PApplet;
 
 public class CircleSapien {
-    private final int X_DIRECTION = 1;
-    private final int Y_DIRECTION = 1;
+    private PApplet sketch;
+    private int color;
     private int x, y;
     private int diameter;
-    private PApplet sketch;
-    private String color;
 
-    public CircleSapien(PApplet sketch, String color, int diameter) {
+    public CircleSapien(PApplet sketch, int color, int diameter, int x, int y) {
         this.sketch = sketch;
         this.color = color;
         this.diameter = diameter;
-        this.x = sketch.width / 2;
-        this.y = (sketch.height / 2) + 200;
+        this.x = x;
+        this.y = y;
     }
 
     public void setX(int x) {
@@ -30,7 +28,7 @@ public class CircleSapien {
      */
     public void move() {
         int randNum = (int) sketch.random(0, 100);
-        setX(MotionHelper.randomVibrateHorizontal(randNum, x, 50));
+        setX(Motion.randomVibrateHorizontal(randNum, x, 50));
         // if (y - diameter / 2 < 0) {
         // setY(MotionHelper.randomMoveDown(randNum, y, 100));
         // } else
@@ -43,15 +41,11 @@ public class CircleSapien {
     }
 
     /**
-     * die
-     */
-    public void die() {
-    }
-
-    /**
-     * draw
+     * draw on PApplet canvas
      */
     public void draw() {
+        sketch.fill(color);
+        sketch.noStroke();
         sketch.circle(x, y, diameter);
     }
 
@@ -61,4 +55,10 @@ public class CircleSapien {
     // public boolean collide(){
     // return;
     // }
+
+    /**
+     * die
+     */
+    public void die() {
+    }
 }

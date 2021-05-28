@@ -2,7 +2,7 @@
  * MotionHelper provides static methods to assist with the behavior of how
  * objects can move on the canvas
  */
-public class MotionHelper {
+public class Motion {
     private static final int DISTANCE = 1;
 
     /**

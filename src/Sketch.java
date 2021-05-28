@@ -14,7 +14,7 @@ public class Sketch extends PApplet {
     @Override
     public void setup() {
         background(BACKGROUND_COLOR);
-        circleSapien = new CircleSapien(this, "blue", 100);
+        circleSapien = new CircleSapien(this, new Color(this).warmColor(), (int) random(20, 60), 100, 100);
     }
 
     @Override
