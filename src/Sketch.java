@@ -4,7 +4,7 @@ public class Sketch extends PApplet {
     private int WINDOW_X = 600;
     private int WINDOW_Y = 600;
     private int BACKGROUND_COLOR = 100;
-    HomoSapien homoSapien;
+    CircleSapien circleSapien;
 
     @Override
     public void settings() {
@@ -14,13 +14,13 @@ public class Sketch extends PApplet {
     @Override
     public void setup() {
         background(BACKGROUND_COLOR);
-        homoSapien = new HomoSapien(this, "blue", 10);
+        circleSapien = new CircleSapien(this, "blue", 100);
     }
 
     @Override
     public void draw() {
         background(BACKGROUND_COLOR);
-        homoSapien.draw();
-        homoSapien.move();
+        circleSapien.draw();
+        circleSapien.move();
     }
 }
