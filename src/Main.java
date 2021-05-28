@@ -9,7 +9,7 @@ import processing.core.PApplet;
  * CS162 Final Project
  *
  * @author Zachary Bochanski
- * @version 1.0
+ * @version 1.1
  * @since 2021.05.19
  */
 public class Main {
