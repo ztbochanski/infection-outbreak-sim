@@ -1,10 +1,8 @@
 import processing.core.PApplet;
 
 public class CircleSapien {
-    private final int RIGHT = 1;
-    private final int LEFT = 1;
-    private final int DOWN = 1;
-    private final int UP = 1;
+    private final int X_DIRECTION = 1;
+    private final int Y_DIRECTION = 1;
     private int x, y;
     private int diameter;
     private PApplet sketch;
@@ -18,62 +16,11 @@ public class CircleSapien {
         this.y = (sketch.height / 2) - 200;
     }
 
-    public void randomMoveInPlace() {
-        int direction = (int) sketch.random(0, 100);
-        if (direction < 25)
-            x = x + RIGHT;
-        else if (direction < 50)
-            x = x - LEFT;
-        else {
-            if (y + diameter / 2 > sketch.height)
-                y = y - DOWN;
-            else
-                y = y + DOWN;
-        }
-    }
-
-    public void randomMoveDown() {
-        int direction = (int) sketch.random(0, 100);
-        if (direction < 33)
-            x = x + RIGHT;
-        else if (direction < 66)
-            x = x - LEFT;
-        else if (direction < 90)
-            y = y + DOWN;
-        else
-            y = y - UP;
-    }
-
-    public void randomMoveUp() {
-        int direction = (int) sketch.random(0, 100);
-        if (direction < 33)
-            x = x + RIGHT;
-        else if (direction < 66)
-            x = x - LEFT;
-        else if (direction < 90)
-            y = y - DOWN;
-        else
-            y = y + UP;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
     /**
      * move
      */
     public void move() {
-        // int direction = (int) sketch.random(0, 100);
-        if (y + diameter / 2 > sketch.height || y - diameter / 2 < 0)
-            // Motion.randomMoveInPlace(direction, x, y);
-            randomMoveInPlace();
-        else
-            randomMoveUp();
+        randomMoveUp();
     }
 
     /**
@@ -95,5 +42,41 @@ public class CircleSapien {
     // public boolean collide(){
     // return;
     // }
+
+    /**
+     * randomly move down and stay within window
+     */
+    public void randomMoveDown() {
+        int direction = (int) sketch.random(0, 100);
+        if (direction < 33)
+            x = x + X_DIRECTION;
+        else if (direction < 66)
+            x = x - X_DIRECTION;
+        else if (direction < 90) {
+            if (y + diameter / 2 > sketch.height)
+                y = y - Y_DIRECTION;
+            else
+                y = y + Y_DIRECTION;
+        } else
+            y = y - Y_DIRECTION;
+    }
+
+    /**
+     * randomly move up and stay within window
+     */
+    public void randomMoveUp() {
+        int direction = (int) sketch.random(0, 100);
+        if (direction < 33)
+            x = x + X_DIRECTION;
+        else if (direction < 66)
+            x = x - X_DIRECTION;
+        else if (direction < 90) {
+            if (y - diameter / 2 < 0)
+                y = y + Y_DIRECTION;
+            else
+                y = y - Y_DIRECTION;
+        } else
+            y = y + Y_DIRECTION;
+    }
 
 }
