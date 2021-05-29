@@ -15,6 +15,7 @@ A focus is placed adhering to the Java conventions outlined in [Java Style Guide
 ## UML
 
 ...in progress
+![uml](Documentation/images/CS162FinalProject_UML.png)
 
 
 ## Demo Video
