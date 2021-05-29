@@ -45,10 +45,27 @@ public class Zombie extends CircleSapien {
             setY(Motion.randomMoveDown(randNum, super.getY(), 66));
     }
 
-    public void kill(CircleSapien c) {
-        if (super.isCollision(c) && super.isLarger(c)) {
-            System.out.println("infected a human");
-        } else
-            System.out.println("did not infect");
+    /**
+     * kill behavior
+     */
+    @Override
+    public void kill() {
+        // make sound
+    }
+
+    /**
+     * die behavior
+     */
+    @Override
+    public void explode() {
+        // explode effect
+    }
+
+    /**
+     * convert behavior
+     */
+    @Override
+    public void convert() {
+        // change object
     }
 }

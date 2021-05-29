@@ -38,7 +38,6 @@ public class Sketch extends PApplet {
         zombie.move();
         human.draw();
         human.move();
-        human.kill(zombie);
 
     }
 }

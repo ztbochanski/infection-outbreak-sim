@@ -45,11 +45,27 @@ public class Human extends CircleSapien {
             setY(Motion.randomMoveUp(randNum, super.getY(), 66));
     }
 
+    /**
+     * kill behavior
+     */
     @Override
-    public void kill(CircleSapien c) {
-        if (super.isCollision(c) && super.isLarger(c)) {
-            System.out.println("killed a zombie");
-        } else
-            System.out.println("didn't get a zombie");
+    public void kill() {
+        // make sound
+    }
+
+    /**
+     * die behavior
+     */
+    @Override
+    public void explode() {
+        // explode effect
+    }
+
+    /**
+     * convert behavior
+     */
+    @Override
+    public void convert() {
+        // change object
     }
 }

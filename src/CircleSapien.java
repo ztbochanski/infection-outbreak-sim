@@ -33,9 +33,19 @@ public abstract class CircleSapien {
     public abstract void move();
 
     /**
-     * destroy the other object
+     * kill behavior
      */
-    public abstract void kill(CircleSapien c);
+    public abstract void kill();
+
+    /**
+     * die behavior
+     */
+    public abstract void explode();
+
+    /**
+     * convert behavior
+     */
+    public abstract void convert();
 
     /**
      * set x position
