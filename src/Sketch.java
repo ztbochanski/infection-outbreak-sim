@@ -7,8 +7,7 @@ public class Sketch extends PApplet {
     private int WINDOW_X = 600;
     private int WINDOW_Y = 600;
     private int BACKGROUND_COLOR = 100;
-    CircleSapien zombie;
-    CircleSapien human;
+    Simulator simulator;
 
     /**
      * settings from PApplet
@@ -24,8 +23,7 @@ public class Sketch extends PApplet {
     @Override
     public void setup() {
         background(BACKGROUND_COLOR);
-        zombie = new Zombie(this, 100, 100);
-        human = new Human(this, 100, 150);
+        simulator = new Simulator(this);
     }
 
     /**
@@ -34,10 +32,10 @@ public class Sketch extends PApplet {
     @Override
     public void draw() {
         background(BACKGROUND_COLOR);
-        zombie.draw();
-        zombie.move();
-        human.draw();
-        human.move();
+        for (int i = 0; i < simulator.circleSapienSystem.getSize() - 1; i++) {
+            simulator.circleSapienSystem.getSapien(i).draw();
+            simulator.circleSapienSystem.getSapien(i).move();
 
+        }
     }
 }
