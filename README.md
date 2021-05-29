@@ -10,7 +10,7 @@ The intent of this project is to create a functional demonstration of object ori
 - abstraction
 - polymorphism
 
-A focus is placed following the Java conventions outlined in [Java Style Guide](https://google.github.io/styleguide/javaguide.html#s5-naming).
+A focus is placed adhering to the Java conventions outlined in [Java Style Guide](https://google.github.io/styleguide/javaguide.html#s5-naming).
 
 ## Design Approach
 
@@ -18,3 +18,5 @@ A focus is placed following the Java conventions outlined in [Java Style Guide](
 2. UML diagram
 3. lay out programming tasks
 4. run sprints on tasks
+5. compare program to UML
+6. write tests
