@@ -7,7 +7,7 @@ public class Sketch extends PApplet {
     private int WINDOW_X = 600;
     private int WINDOW_Y = 600;
     private int BACKGROUND_COLOR = 100;
-    Simulator simulator;
+    SimController simController;
 
     /**
      * settings from PApplet
@@ -23,7 +23,8 @@ public class Sketch extends PApplet {
     @Override
     public void setup() {
         background(BACKGROUND_COLOR);
-        simulator = new Simulator(this);
+        simController = new SimController(this);
+        simController.createPopulation(100, 25);
     }
 
     /**
@@ -32,10 +33,5 @@ public class Sketch extends PApplet {
     @Override
     public void draw() {
         background(BACKGROUND_COLOR);
-        for (int i = 0; i < simulator.circleSapienSystem.getSize() - 1; i++) {
-            simulator.circleSapienSystem.getSapien(i).draw();
-            simulator.circleSapienSystem.getSapien(i).move();
-
-        }
     }
 }
