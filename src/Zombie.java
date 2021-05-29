@@ -38,7 +38,6 @@ public class Zombie extends CircleSapien {
     public void move() {
         int randNum = (int) sketch.random(0, 100);
         setX(Motion.randomVibrateHorizontal(randNum, super.getX(), 50));
-
         // move down
         if (super.getY() + super.getDiameter() / 2 > sketch.height) {
             setY(Motion.randomMoveUp(randNum, super.getY(), 100));

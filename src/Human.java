@@ -38,7 +38,6 @@ public class Human extends CircleSapien {
     public void move() {
         int randNum = (int) sketch.random(0, 100);
         setX(Motion.randomVibrateHorizontal(randNum, super.getX(), 50));
-
         // move up
         if (super.getY() - super.getDiameter() / 2 < 0) {
             setY(Motion.randomMoveDown(randNum, super.getY(), 100));
