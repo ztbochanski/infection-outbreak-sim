@@ -1,3 +1,20 @@
-# CS162Bochanski_FinalProject
+# Bochanski Java Basic Concepts Demo
 
-Zombie game using processing library and Java
+## Summary
+
+> A zombie vs human simulation using the [Processing](https://processing.org/) library and Java.
+
+The intent of this project is to create a functional demonstration of object oriented programming concepts including:
+- encapsulation
+- inheritance
+- abstraction
+- polymorphism
+
+A focus is placed following the Java conventions outlined in [Java Style Guide](https://google.github.io/styleguide/javaguide.html#s5-naming).
+
+## Design Approach
+
+1. prototyping/brainstorming document
+2. UML diagram
+3. lay out programming tasks
+4. run sprints on tasks
