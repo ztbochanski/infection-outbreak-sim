@@ -12,6 +12,15 @@ The intent of this project is to create a functional demonstration of object ori
 
 A focus is placed adhering to the Java conventions outlined in [Java Style Guide](https://google.github.io/styleguide/javaguide.html#s5-naming).
 
+## UML
+
+...in progress
+
+
+## Demo Video
+
+...in progress
+
 ## Design Approach
 
 1. prototyping/brainstorming document
