@@ -33,6 +33,11 @@ public abstract class CircleSapien {
     public abstract void move();
 
     /**
+     * destroy the other object
+     */
+    public abstract void kill(CircleSapien c);
+
+    /**
      * set x position
      * 
      * @param x

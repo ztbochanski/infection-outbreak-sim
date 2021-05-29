@@ -38,6 +38,7 @@ public class Sketch extends PApplet {
         zombie.move();
         human.draw();
         human.move();
-        System.out.println(human.isCollision(zombie));
+        human.kill(zombie);
+
     }
 }
