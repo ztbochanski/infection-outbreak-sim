@@ -52,4 +52,24 @@ public class Motion {
         else
             return y + DISTANCE;
     }
+
+    /**
+     * move at a constant rate up
+     * 
+     * @param y
+     * @return new y coordinate
+     */
+    public static int constantMoveUp(int y) {
+        return y - DISTANCE;
+    }
+
+    /**
+     * move at a constant rate down
+     * 
+     * @param y
+     * @return new y coordinate
+     */
+    public static int constantMoveDown(int y) {
+        return y + DISTANCE;
+    }
 }

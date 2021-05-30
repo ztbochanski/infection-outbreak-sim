@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import processing.core.PApplet;
 
 /**
@@ -14,8 +15,8 @@ public class Human extends CircleSapien {
      * @param x
      * @param y
      */
-    public Human(PApplet sketch, int x, int y) {
-        super(sketch, x, y);
+    public Human(PApplet sketch, int x, int y, ArrayList<CircleSapien> circleSapienSystem) {
+        super(sketch, x, y, circleSapienSystem);
         this.sketch = sketch;
         this.color = new Color(this.sketch).randomCoolColor();
     }
@@ -43,6 +44,17 @@ public class Human extends CircleSapien {
             setY(Motion.randomMoveDown(randNum, super.getY(), 100));
         } else
             setY(Motion.randomMoveUp(randNum, super.getY(), 66));
+    }
+
+    /**
+     * test movement for constant movement
+     */
+    public void testMove() {
+        // move up
+        if (super.getY() - super.getDiameter() / 2 < 0) {
+            setY(Motion.constantMoveDown(super.getY()));
+        } else
+            setY(Motion.constantMoveUp(super.getY()));
     }
 
     /**

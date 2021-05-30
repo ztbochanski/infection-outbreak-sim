@@ -83,7 +83,7 @@ public class CircleSapienSystem {
      */
     public void addRandZombie() {
         addSapien(new Zombie(sketch, (int) sketch.random(sketch.width),
-                (int) sketch.random((float) (sketch.height * .25))));
+                (int) sketch.random((float) (sketch.height * .25)), circleSapienSystem));
     }
 
     /**
@@ -91,18 +91,51 @@ public class CircleSapienSystem {
      */
     public void addRandHuman() {
         addSapien(new Human(sketch, (int) sketch.random(sketch.width),
-                sketch.height - (int) sketch.random((float) (sketch.height * .25))));
+                sketch.height - (int) sketch.random((float) (sketch.height * .25)), circleSapienSystem));
     }
 
+    public void addTestZombie(int x, int y) {
+        addSapien(new Zombie(sketch, x, y, circleSapienSystem));
+    }
+
+    public void addTestHuman(int x, int y) {
+        addSapien(new Human(sketch, x, y, circleSapienSystem));
+    }
+
+    /**
+     * move each object in the system
+     */
     public void update() {
         for (CircleSapien c : circleSapienSystem) {
             c.move();
         }
     }
 
+    /**
+     * move each object in the system
+     */
+    public void testUpdate() {
+        for (CircleSapien c : circleSapienSystem) {
+            c.testMove();
+        }
+    }
+
+    /**
+     * draw each object in the system
+     */
     public void draw() {
         for (CircleSapien c : circleSapienSystem) {
             c.draw();
         }
     }
+
+    public void killInfected() {
+    }
+
+    public void collide() {
+        for (int i = 0; i < circleSapienSystem.size(); i++) {
+            circleSapienSystem.get(i).collide();
+        }
+    }
+
 }

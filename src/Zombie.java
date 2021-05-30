@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import processing.core.PApplet;
 
 /**
@@ -14,8 +15,8 @@ public class Zombie extends CircleSapien {
      * @param x
      * @param y
      */
-    public Zombie(PApplet sketch, int x, int y) {
-        super(sketch, x, y);
+    public Zombie(PApplet sketch, int x, int y, ArrayList<CircleSapien> circleSapienSystem) {
+        super(sketch, x, y, circleSapienSystem);
         this.sketch = sketch;
         this.color = new Color(this.sketch).randomWarmColor();
     }
@@ -43,6 +44,17 @@ public class Zombie extends CircleSapien {
             setY(Motion.randomMoveUp(randNum, super.getY(), 100));
         } else
             setY(Motion.randomMoveDown(randNum, super.getY(), 66));
+    }
+
+    /**
+     * test movement for constant movement
+     */
+    public void testMove() {
+        // move down
+        if (super.getY() + super.getDiameter() / 2 > sketch.height) {
+            setY(Motion.constantMoveUp(super.getY()));
+        } else
+            setY(Motion.constantMoveDown(super.getY()));
     }
 
     /**

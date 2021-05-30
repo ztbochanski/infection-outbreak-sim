@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-
 import processing.core.PApplet;
 
 /**
@@ -8,6 +7,7 @@ import processing.core.PApplet;
 public abstract class CircleSapien {
     private PApplet sketch;
     private ParticleSystem p;
+    private ArrayList<CircleSapien> circleSapienSystem;
     private int x, y;
     private int diameter;
     private int color;
@@ -20,8 +20,9 @@ public abstract class CircleSapien {
      * @param x
      * @param y
      */
-    public CircleSapien(PApplet sketch, int x, int y) {
+    public CircleSapien(PApplet sketch, int x, int y, ArrayList<CircleSapien> circleSapienSystem) {
         this.sketch = sketch;
+        this.circleSapienSystem = circleSapienSystem;
         this.x = x;
         this.y = y;
         this.p = new ParticleSystem(this.x, this.y, this.sketch);
@@ -40,6 +41,11 @@ public abstract class CircleSapien {
      * abstract, each child must implement their own movements
      */
     public abstract void move();
+
+    /**
+     * test movement for constant movement
+     */
+    public abstract void testMove();
 
     /**
      * kill behavior
@@ -159,29 +165,36 @@ public abstract class CircleSapien {
      * @return true if contact is made
      */
     public boolean madeContact(CircleSapien c) {
-        double distanceFormula = Math.sqrt(Math.pow((c.getX() - x), 2) + Math.pow((c.getY() - y), 2)) - (diameter / 2)
-                - (c.getDiameter() / 2);
+        double dist = Math.sqrt(Math.pow((c.getX() - this.getX()), 2) + Math.pow((c.getY() - this.getY()), 2));
+
+        double distanceFormula = dist - ((this.getDiameter() / 2) - (c.getDiameter() / 2));
+
         if (distanceFormula <= 0 && !contact) {
             setContact(true);
         }
         return contact;
     }
 
-    /**
-     * checks to see if subclasses collide with each other
-     * 
-     * @param circleSapienSystem
-     */
-    public boolean collisionWith(ArrayList<CircleSapien> circleSapienSystem) {
-        CircleSapien sapienA = this;
-        for (CircleSapien sapienB : circleSapienSystem) {
-            if (sapienB != sapienA && madeContact(sapienB) && sapienA.getClass() != sapienB.getClass()) {
-                return true;
-            } else
-                return false;
+    public void collide() {
+        for (int i = 0; i < circleSapienSystem.size(); i++) {
+            CircleSapien c = circleSapienSystem.get(i);
+            double dist = Math.sqrt(Math.pow((c.getX() - this.getX()), 2) + Math.pow((c.getY() - this.getY()), 2))
+                    - ((this.getDiameter() / 2) - (c.getDiameter() / 2));
+            if (dist < 0 && c.getClass() != this.getClass() && c != this && !contact) {
+                setContact(true);
+                System.out.println(c.getClass() + " collided with " + this.getClass());
+            }
         }
-        return contact;
     }
+
+    // public void collisionWith(ArrayList<CircleSapien> circleSapienSystem) {
+    // for (CircleSapien other : circleSapienSystem) {
+    // if (other != this && this.madeContact(other) && this.getClass() !=
+    // other.getClass()) {
+    // System.out.println("passed in sapien c made contact with " + other);
+    // }
+    // }
+    // }
 
     /**
      * Takes a CircleSapien object and compares sizes
