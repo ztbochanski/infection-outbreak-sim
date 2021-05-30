@@ -9,6 +9,8 @@ public class Sketch extends PApplet {
     private int BACKGROUND_COLOR = 100;
     SimController simController;
 
+    CircleSapien c;
+
     /**
      * settings from PApplet
      */
@@ -24,7 +26,9 @@ public class Sketch extends PApplet {
     public void setup() {
         background(BACKGROUND_COLOR);
         simController = new SimController(this);
-        simController.createPopulation(100, 25);
+        simController.createSample(100, 25); // pop size, percentage zombies
+
+        c = new Zombie(this, 100, 100);
     }
 
     /**
@@ -33,5 +37,7 @@ public class Sketch extends PApplet {
     @Override
     public void draw() {
         background(BACKGROUND_COLOR);
+        simController.simulateMovement();
+        // c.draw();
     }
 }

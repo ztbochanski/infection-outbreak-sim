@@ -1,16 +1,24 @@
 import java.util.ArrayList;
 
+import processing.core.PApplet;
+
 /**
  * CircleSapienSystem class represents a system of CircleSapien Objects
  */
 public class CircleSapienSystem {
+    PApplet sketch;
     private ArrayList<CircleSapien> circleSapienSystem;
 
     /**
      * CircleSapienSystem constructor creates and array list to store sapien objects
      */
-    public CircleSapienSystem() {
+    public CircleSapienSystem(PApplet sketch) {
+        this.sketch = sketch;
         this.circleSapienSystem = new ArrayList<CircleSapien>();
+    }
+
+    public ArrayList<CircleSapien> getSapienArray() {
+        return this.circleSapienSystem;
     }
 
     /**
@@ -68,5 +76,33 @@ public class CircleSapienSystem {
      */
     public void setSapienAt(int index, CircleSapien c) {
         circleSapienSystem.set(index, c);
+    }
+
+    /**
+     * add zombie object at random location top of window
+     */
+    public void addRandZombie() {
+        addSapien(new Zombie(sketch, (int) sketch.random(sketch.width),
+                (int) sketch.random((float) (sketch.height * .25))));
+    }
+
+    /**
+     * add human object at random location bottom of window
+     */
+    public void addRandHuman() {
+        addSapien(new Human(sketch, (int) sketch.random(sketch.width),
+                sketch.height - (int) sketch.random((float) (sketch.height * .25))));
+    }
+
+    public void update() {
+        for (CircleSapien c : circleSapienSystem) {
+            c.move();
+        }
+    }
+
+    public void draw() {
+        for (CircleSapien c : circleSapienSystem) {
+            c.draw();
+        }
     }
 }

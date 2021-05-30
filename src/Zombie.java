@@ -54,14 +54,6 @@ public class Zombie extends CircleSapien {
     }
 
     /**
-     * die behavior
-     */
-    @Override
-    public void explode() {
-        // explode effect
-    }
-
-    /**
      * convert behavior
      */
     @Override

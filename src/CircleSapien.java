@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 
 /**
@@ -5,8 +7,11 @@ import processing.core.PApplet;
  */
 public abstract class CircleSapien {
     private PApplet sketch;
+    private ParticleSystem p;
     private int x, y;
-    private final int diameter;
+    private int diameter;
+    private int color;
+    private boolean contact;
 
     /**
      * Constructor takes the PApplet object and a position x and y
@@ -17,9 +22,13 @@ public abstract class CircleSapien {
      */
     public CircleSapien(PApplet sketch, int x, int y) {
         this.sketch = sketch;
-        this.diameter = (int) this.sketch.random(10, 40);
         this.x = x;
         this.y = y;
+        this.p = new ParticleSystem(this.x, this.y, this.sketch);
+        this.diameter = (int) this.sketch.random(10, 40);
+        this.color = 0;
+        this.contact = false;
+
     }
 
     /**
@@ -38,9 +47,12 @@ public abstract class CircleSapien {
     public abstract void kill();
 
     /**
-     * die behavior
+     * explode behavior
      */
-    public abstract void explode();
+    public void explode() {
+        p.draw();
+        p.update();
+    }
 
     /**
      * convert behavior
@@ -57,21 +69,21 @@ public abstract class CircleSapien {
     }
 
     /**
-     * set y position
-     * 
-     * @param y
-     */
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    /**
      * get the x position
      * 
      * @return x
      */
     public int getX() {
         return this.x;
+    }
+
+    /**
+     * set y position
+     * 
+     * @param y
+     */
+    public void setY(int y) {
+        this.y = y;
     }
 
     /**
@@ -84,7 +96,16 @@ public abstract class CircleSapien {
     }
 
     /**
-     * get the diameter of the circle
+     * set the diameter
+     * 
+     * @param diameter
+     */
+    public void setDiameter(int diameter) {
+        this.diameter = diameter;
+    }
+
+    /**
+     * get the diameter
      * 
      * @return diameter
      */
@@ -93,22 +114,73 @@ public abstract class CircleSapien {
     }
 
     /**
-     * didCollide returns true when the distance between the two edges of the
-     * compared circles is 0;
+     * set the color
      * 
-     * @param c CircleSapien object to check for a collision
+     * @param color
+     */
+    public void setColor(int color) {
+        this.color = color;
+    }
+
+    /**
+     * get the color
+     * 
+     * @param color
      * @return
      */
-    public boolean isCollision(CircleSapien c) {
-        // distance formula
-        double dist = Math.sqrt(Math.pow((c.getX() - x), 2) + Math.pow((c.getY() - y), 2));
-        // subtract radii
-        double distFromEdge = dist - (diameter / 2) - (c.getDiameter() / 2);
-        // check when distance to edges is 0 or less
-        if (distFromEdge <= 0) {
-            return true;
-        } else
-            return false;
+    public int getColor(int color) {
+        return this.color;
+    }
+
+    /**
+     * get contact
+     * 
+     * @return contact
+     */
+    public boolean getContact() {
+        return this.contact;
+    }
+
+    /**
+     * set contact
+     * 
+     * @param contact true or false
+     */
+    public void setContact(boolean contact) {
+        this.contact = contact;
+    }
+
+    /**
+     * madeContact uses distance formula for determine if the passed in object has a
+     * distance away of 0 or less. Sets the contact member variable true to flag if
+     * contact is made.
+     * 
+     * @param c CircleSapien object to check for a collision
+     * @return true if contact is made
+     */
+    public boolean madeContact(CircleSapien c) {
+        double distanceFormula = Math.sqrt(Math.pow((c.getX() - x), 2) + Math.pow((c.getY() - y), 2)) - (diameter / 2)
+                - (c.getDiameter() / 2);
+        if (distanceFormula <= 0 && !contact) {
+            setContact(true);
+        }
+        return contact;
+    }
+
+    /**
+     * checks to see if subclasses collide with each other
+     * 
+     * @param circleSapienSystem
+     */
+    public boolean collisionWith(ArrayList<CircleSapien> circleSapienSystem) {
+        CircleSapien sapienA = this;
+        for (CircleSapien sapienB : circleSapienSystem) {
+            if (sapienB != sapienA && madeContact(sapienB) && sapienA.getClass() != sapienB.getClass()) {
+                return true;
+            } else
+                return false;
+        }
+        return contact;
     }
 
     /**

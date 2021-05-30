@@ -9,36 +9,62 @@ public class SimController {
 
     public SimController(PApplet sketch) {
         this.sketch = sketch;
-        circleSapienSystem = new CircleSapienSystem();
+        circleSapienSystem = new CircleSapienSystem(this.sketch);
     }
 
     /**
      * generate a population of zombies and humans
      */
-    public void createPopulation(float popSize, float zombiePercentage) {
+    public void createSample(float popSize, float zombiePercentage) {
         int totalCount = 0;
         float targetZombiePop = (popSize * (zombiePercentage / 100));
         while (totalCount < popSize) {
             if (totalCount < targetZombiePop) {
-                // add zombies
+                circleSapienSystem.addRandZombie();
                 totalCount++;
             } else {
-                // add humans
+                circleSapienSystem.addRandHuman();
                 totalCount++;
             }
         }
     }
 
-    public void start() {
-        // invoke human/zombie behaviors
+    public void simulateMovement() {
+        circleSapienSystem.update();
+        circleSapienSystem.draw();
     }
 
-    public void addZombie(Point point) {
-        // add zombie to system
+    public void contactBehavior() {
+        for (int i = 0; i < circleSapienSystem.getSize(); i++) {
+            circleSapienSystem.getSapien(i).collisionWith(circleSapienSystem.getSapienArray());
+            // CircleSapien sapienA = circleSapienSystem.getSapien(i);
+            // for (CircleSapien sapienB : circleSapienSystem.getSapienArray()) {
+            // if (sapienA != sapienB && sapienA.madeContact(sapienB) && sapienA.getClass()
+            // != sapienB.getClass()) {
+            // if (sapienA.getClass() == Human.class) {
+            // System.out.println(sapienA.getClass() + " is a human");
+            // } else {
+            // System.out.println(sapienA.getClass() + " is a zombie");
+            // }
+
+            // }
+            // }
+        }
     }
 
-    public void addHuman() {
-        // add human to system
+    public void convertToZombie(CircleSapien human) {
     }
+
+    // public void addZombie() {
+    // CircleSapien zombie = new Zombie(sketch, (int) sketch.random(sketch.width),
+    // (int) sketch.random((float) (sketch.height * .25)));
+    // circleSapienSystem.addSapien(zombie);
+    // }
+
+    // public void addHuman() {
+    // CircleSapien human = new Human(sketch, (int) sketch.random(sketch.width),
+    // sketch.height - (int) sketch.random((float) (sketch.height * .25)));
+    // circleSapienSystem.addSapien(human);
+    // }
 
 }
