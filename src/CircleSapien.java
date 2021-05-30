@@ -175,16 +175,45 @@ public abstract class CircleSapien {
         return contact;
     }
 
-    public void collide() {
-        for (int i = 0; i < circleSapienSystem.size(); i++) {
-            CircleSapien c = circleSapienSystem.get(i);
-            double dist = Math.sqrt(Math.pow((c.getX() - this.getX()), 2) + Math.pow((c.getY() - this.getY()), 2))
-                    - ((this.getDiameter() / 2) - (c.getDiameter() / 2));
-            if (dist < 0 && c.getClass() != this.getClass() && c != this && !contact) {
+    // public CircleSapien getCollision() {
+    // for (int i = 0; i < circleSapienSystem.size(); i++) {
+    // CircleSapien c = circleSapienSystem.get(i);
+    // double dist = Math.sqrt(Math.pow((c.getX() - this.getX()), 2) +
+    // Math.pow((c.getY() - this.getY()), 2))
+    // - ((this.getDiameter() / 2) - (c.getDiameter() / 2));
+    // if (dist < 0 && c.getClass() != this.getClass() && c != this && !contact) {
+    // setContact(true);
+    // return c;
+    // }
+    // }
+    // return null;
+    // }
+
+    /**
+     * set contact flag on object and return the object that this touched
+     * 
+     * @return object that came in contact with this one
+     */
+    public CircleSapien getCollision() {
+        for (CircleSapien c : circleSapienSystem) {
+            if (getDistance(c) < 0 && c.getClass() != this.getClass() && c != this && !contact) {
                 setContact(true);
-                System.out.println(c.getClass() + " collided with " + this.getClass());
+                return c;
             }
         }
+        return null;
+    }
+
+    /**
+     * distance formula calculates distance between two points on the cartesian
+     * plane
+     * 
+     * @param c object to compare to this
+     * @return distance
+     */
+    public double getDistance(CircleSapien c) {
+        return Math.sqrt(Math.pow((c.getX() - this.getX()), 2) + Math.pow((c.getY() - this.getY()), 2))
+                - ((this.getDiameter() / 2) - (c.getDiameter() / 2));
     }
 
     // public void collisionWith(ArrayList<CircleSapien> circleSapienSystem) {

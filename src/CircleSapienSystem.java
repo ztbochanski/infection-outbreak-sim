@@ -133,8 +133,10 @@ public class CircleSapienSystem {
     }
 
     public void collide() {
-        for (int i = 0; i < circleSapienSystem.size(); i++) {
-            circleSapienSystem.get(i).collide();
+        for (CircleSapien c : circleSapienSystem) {
+            CircleSapien b = c.getCollision();
+            if (b != null)
+                System.out.println(b + " crashed into " + c);
         }
     }
 
