@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import processing.core.PApplet;
 
 /**
@@ -56,19 +57,4 @@ public class Human extends CircleSapien {
             setY(Motion.constantMoveUp(super.getY()));
     }
 
-    /**
-     * kill behavior
-     */
-    @Override
-    public void kill() {
-        // make sound
-    }
-
-    /**
-     * convert behavior
-     */
-    @Override
-    public void convert() {
-        // change object
-    }
 }

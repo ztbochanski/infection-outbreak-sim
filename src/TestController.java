@@ -22,14 +22,17 @@ public class TestController {
     }
 
     public void testSimulation() {
-        circleSapienSystem.setCollision();
+        circleSapienSystem.setContactFlag();
         circleSapienSystem.testMove();
         circleSapienSystem.draw();
-
     }
 
     public void testInteraction() {
-        circleSapienSystem.testInteraction();
+        circleSapienSystem.setInfected();
+    }
+
+    public void clean() {
+        circleSapienSystem.removeDead();
     }
 
 }

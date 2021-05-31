@@ -50,7 +50,8 @@ public class Sketch extends PApplet {
         background(BACKGROUND_COLOR);
         if (TEST_MODE) {
             testController.testSimulation();
-            // testController.testInteraction();
+            testController.testInteraction();
+            // testController.clean();
         } else {
             simController.simulate();
         }

@@ -157,16 +157,20 @@ public class CircleSapienSystem {
      * for every frame check contact among each object in the array, set object
      * flags
      */
-    public void setCollision() {
+    public void setContactFlag() {
         for (CircleSapien c : circleSapienSystem) {
-            c.setCollision(circleSapienSystem);
+            c.setContactFlag(circleSapienSystem);
         }
     }
 
-    public void testInteraction() {
-        for (CircleSapien c : circleSapienSystem) {
-            if (c.isCarrier())
-                System.out.println(c.getClass());
+    public void setInfected() {
+        for (int i = circleSapienSystem.size() - 1; i >= 0; i--) {
+            CircleSapien c = circleSapienSystem.get(i);
+            if (c.madeContact() && c.getClass() == Human.class) {
+                circleSapienSystem.add(new Zombie(sketch, c.getX(), c.getY(), c.getDiameter()));
+                circleSapienSystem.remove(i);
+            }
         }
     }
+
 }
