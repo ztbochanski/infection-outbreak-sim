@@ -157,11 +157,16 @@ public class CircleSapienSystem {
      * for every frame check contact among each object in the array, set object
      * flags
      */
-    public void collide() {
+    public void setCollision() {
         for (CircleSapien c : circleSapienSystem) {
-            c.collide(circleSapienSystem);
-            if (c.isDead())
-                c.explode();
+            c.setCollision(circleSapienSystem);
+        }
+    }
+
+    public void testInteraction() {
+        for (CircleSapien c : circleSapienSystem) {
+            if (c.isCarrier())
+                System.out.println(c.getClass());
         }
     }
 }

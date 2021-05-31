@@ -13,19 +13,23 @@ public class TestController {
     }
 
     public void createTestSample() {
-        circleSapienSystem.addTestHuman(100, 350);
-        circleSapienSystem.addTestHuman(200, 400);
-        circleSapienSystem.addTestHuman(300, 400);
+        circleSapienSystem.addTestHuman(100, 130);
+        circleSapienSystem.addTestHuman(200, 160);
+        circleSapienSystem.addTestHuman(300, 190);
         circleSapienSystem.addTestZombie(100, 100);
         circleSapienSystem.addTestZombie(200, 100);
         circleSapienSystem.addTestZombie(300, 100);
     }
 
     public void testSimulation() {
-        circleSapienSystem.collide();
+        circleSapienSystem.setCollision();
         circleSapienSystem.testMove();
         circleSapienSystem.draw();
 
+    }
+
+    public void testInteraction() {
+        circleSapienSystem.testInteraction();
     }
 
 }

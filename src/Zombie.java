@@ -15,7 +15,7 @@ public class Zombie extends CircleSapien {
      * @param y
      */
     public Zombie(PApplet sketch, int x, int y) {
-        super(sketch, x, y);
+        super(sketch, x, y, true);
         this.sketch = sketch;
         this.color = new Color(this.sketch).randomWarmColor();
     }

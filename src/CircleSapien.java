@@ -30,7 +30,25 @@ public abstract class CircleSapien {
         this.color = 0;
         this.IS_CARRIER = false;
         this.IS_DEAD = false;
+    }
 
+    /**
+     * specify if the object is a carrier from creation
+     * 
+     * @param sketch
+     * @param x
+     * @param y
+     * @param IS_CARRIER
+     */
+    public CircleSapien(PApplet sketch, int x, int y, boolean IS_CARRIER) {
+        this.sketch = sketch;
+        // this.circleSapienSystem = circleSapienSystem;
+        this.x = x;
+        this.y = y;
+        this.diameter = (int) this.sketch.random(10, 40);
+        this.color = 0;
+        this.IS_CARRIER = IS_CARRIER;
+        this.IS_DEAD = false;
     }
 
     /**
@@ -136,7 +154,7 @@ public abstract class CircleSapien {
      * 
      * @return contact
      */
-    public boolean getCarrier() {
+    public boolean isCarrier() {
         return this.IS_CARRIER;
     }
 
@@ -186,12 +204,13 @@ public abstract class CircleSapien {
         this.p = new ParticleSystem(x, y, sketch);
     }
 
-    public void collide(ArrayList<CircleSapien> circleSapienSystem) {
+    public void setCollision(ArrayList<CircleSapien> circleSapienSystem) {
         for (CircleSapien c : circleSapienSystem) {
+            // if(physically collided && different subclasses && not itself && not carrier)
             if (getDistance(c) < 0 && c.getClass() != this.getClass() && c != this && !IS_CARRIER) {
                 IS_CARRIER = true;
-                IS_DEAD = true;
                 createExplosion(x, y, sketch);
+                System.out.println(this.getClass());
             }
         }
     }
@@ -205,7 +224,7 @@ public abstract class CircleSapien {
      */
     public double getDistance(CircleSapien c) {
         return Math.sqrt(Math.pow((c.getX() - x), 2) + Math.pow((c.getY() - y), 2))
-                - ((diameter / 2) - (c.getDiameter() / 2));
+                - ((diameter / 2) + (c.getDiameter() / 2));
     }
 
     /**
