@@ -136,7 +136,7 @@ public abstract class CircleSapien {
      * 
      * @return contact
      */
-    public boolean getContact() {
+    public boolean getCarrier() {
         return this.IS_CARRIER;
     }
 
@@ -145,12 +145,26 @@ public abstract class CircleSapien {
      * 
      * @param contact true or false
      */
-    public void setContact(boolean IS_CARRIER) {
+    public void setCarrier(boolean IS_CARRIER) {
         this.IS_CARRIER = IS_CARRIER;
     }
 
+    /**
+     * check object state
+     * 
+     * @return isDead true or false
+     */
     public boolean isDead() {
         return this.IS_DEAD;
+    }
+
+    /**
+     * set object state true or false
+     * 
+     * @param IS_DEAD
+     */
+    public void setDead(boolean IS_DEAD) {
+        this.IS_DEAD = IS_DEAD;
     }
 
     /**
@@ -180,17 +194,6 @@ public abstract class CircleSapien {
                 createExplosion(x, y, sketch);
             }
         }
-
-        // for (int i = circleSapienSystem.size() - 1; i >= 0; i--) {
-        // CircleSapien c = circleSapienSystem.get(i);
-        // if (getDistance(c) < 0 && c.getClass() != this.getClass() && c != this &&
-        // !MADE_CONTACT) {
-        // setContact(true);
-        // // createExplosion(x, y, sketch);
-        // return c;
-        // }
-        // }
-        // return null;
     }
 
     /**

@@ -25,6 +25,7 @@ public class TestController {
         circleSapienSystem.collide();
         circleSapienSystem.testMove();
         circleSapienSystem.draw();
+
     }
 
 }

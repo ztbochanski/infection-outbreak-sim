@@ -127,32 +127,25 @@ public class CircleSapienSystem {
      * move each object in the system with constant motion
      */
     public void testMove() {
-        // ParticleSystem p = new ParticleSystem(sketch);
-        // p.draw();
-        // p.update();
         for (CircleSapien c : circleSapienSystem) {
             c.testMove();
         }
-        // for (int i = circleSapienSystem.size() - 1; i >= 0; i--) {
-        // circleSapienSystem.get(i).testMove();
-        // }
     }
 
     /**
-     * draw each object in the system
+     * draw each living object in the system
      */
     public void draw() {
         for (CircleSapien c : circleSapienSystem) {
             if (!c.isDead())
                 c.draw();
         }
-
-        // for (int i = circleSapienSystem.size() - 1; i >= 0; i--) {
-        // circleSapienSystem.get(i).draw();
-        // }
     }
 
-    public void killInfected() {
+    /**
+     * remove object's flagged as dead from the array
+     */
+    public void removeDead() {
         for (int i = circleSapienSystem.size() - 1; i >= 0; i--) {
             if (circleSapienSystem.get(i).isDead()) {
                 circleSapienSystem.remove(i);
@@ -160,19 +153,16 @@ public class CircleSapienSystem {
         }
     }
 
+    /**
+     * for every frame check contact among each object in the array, set object
+     * flags
+     */
     public void collide() {
         for (CircleSapien c : circleSapienSystem) {
             c.collide(circleSapienSystem);
             if (c.isDead())
                 c.explode();
         }
-
-        // for (int i = circleSapienSystem.size() - 1; i >= 0; i--) {
-        // circleSapienSystem.get(i).collide(circleSapienSystem);
-        // if (circleSapienSystem.get(i).isDead()) {
-        // circleSapienSystem.remove(i);
-        // }
-        // }
     }
 
 }

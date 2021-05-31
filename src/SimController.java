@@ -33,6 +33,7 @@ public class SimController {
      * move each member of the system to their next position
      */
     public void simulate() {
+        circleSapienSystem.collide();
         circleSapienSystem.move();
         circleSapienSystem.draw();
     }
