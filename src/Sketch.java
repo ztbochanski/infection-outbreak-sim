@@ -17,6 +17,7 @@ public class Sketch extends PApplet {
     @Override
     public void settings() {
         size(WINDOW_X, WINDOW_Y);
+        setTestMode(true);
     }
 
     /**
@@ -26,6 +27,7 @@ public class Sketch extends PApplet {
     public void setup() {
         background(BACKGROUND_COLOR);
         if (TEST_MODE) {
+            System.out.println("**TEST MODE IS ACTIVE**");
             testController = new TestController(this);
             testController.createTestSample();
         } else {
@@ -52,7 +54,7 @@ public class Sketch extends PApplet {
      * 
      * @return true for test mode active
      */
-    public boolean getMode() {
+    public boolean getTestMode() {
         return this.TEST_MODE;
     }
 
@@ -61,7 +63,7 @@ public class Sketch extends PApplet {
      * 
      * @param TEST_MODE
      */
-    public void setMode(boolean TEST_MODE) {
+    public void setTestMode(boolean TEST_MODE) {
         this.TEST_MODE = TEST_MODE;
     }
 }
