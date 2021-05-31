@@ -4,8 +4,8 @@ import processing.core.PApplet;
  * Sketch class implements methods from processing applet class
  */
 public class Sketch extends PApplet {
-    private int WINDOW_X = 600;
-    private int WINDOW_Y = 600;
+    private int WINDOW_X;
+    private int WINDOW_Y;
     private int BACKGROUND_COLOR = 100;
     private boolean TEST_MODE;
     SimController simController;
@@ -16,8 +16,13 @@ public class Sketch extends PApplet {
      */
     @Override
     public void settings() {
+        setTestMode(false);
+        if (TEST_MODE) {
+            setWindowSize(600, 600);
+        } else {
+            setWindowSize(1000, 600);
+        }
         size(WINDOW_X, WINDOW_Y);
-        setTestMode(true);
     }
 
     /**
@@ -52,18 +57,20 @@ public class Sketch extends PApplet {
     /**
      * control the mode
      * 
-     * @return true for test mode active
-     */
-    public boolean getTestMode() {
-        return this.TEST_MODE;
-    }
-
-    /**
-     * control the mode
-     * 
      * @param TEST_MODE
      */
     public void setTestMode(boolean TEST_MODE) {
         this.TEST_MODE = TEST_MODE;
+    }
+
+    /**
+     * set window size in sketch
+     * 
+     * @param WINDOW_X
+     * @param WINDOW_Y
+     */
+    public void setWindowSize(int WINDOW_X, int WINDOW_Y) {
+        this.WINDOW_X = WINDOW_X;
+        this.WINDOW_Y = WINDOW_Y;
     }
 }
