@@ -83,7 +83,7 @@ public class CircleSapienSystem {
      */
     public void addRandZombie() {
         addSapien(new Zombie(sketch, (int) sketch.random(sketch.width),
-                (int) sketch.random((float) (sketch.height * .25)), circleSapienSystem));
+                (int) sketch.random((float) (sketch.height * .25))));
     }
 
     /**
@@ -91,33 +91,51 @@ public class CircleSapienSystem {
      */
     public void addRandHuman() {
         addSapien(new Human(sketch, (int) sketch.random(sketch.width),
-                sketch.height - (int) sketch.random((float) (sketch.height * .25)), circleSapienSystem));
+                sketch.height - (int) sketch.random((float) (sketch.height * .25))));
     }
 
+    /**
+     * add a test zombie specify location
+     * 
+     * @param x
+     * @param y
+     */
     public void addTestZombie(int x, int y) {
-        addSapien(new Zombie(sketch, x, y, circleSapienSystem));
+        addSapien(new Zombie(sketch, x, y));
     }
 
+    /**
+     * add a test human specify location
+     * 
+     * @param x
+     * @param y
+     */
     public void addTestHuman(int x, int y) {
-        addSapien(new Human(sketch, x, y, circleSapienSystem));
+        addSapien(new Human(sketch, x, y));
     }
 
     /**
      * move each object in the system
      */
-    public void update() {
+    public void move() {
         for (CircleSapien c : circleSapienSystem) {
             c.move();
         }
     }
 
     /**
-     * move each object in the system
+     * move each object in the system with constant motion
      */
-    public void testUpdate() {
+    public void testMove() {
+        // ParticleSystem p = new ParticleSystem(sketch);
+        // p.draw();
+        // p.update();
         for (CircleSapien c : circleSapienSystem) {
             c.testMove();
         }
+        // for (int i = circleSapienSystem.size() - 1; i >= 0; i--) {
+        // circleSapienSystem.get(i).testMove();
+        // }
     }
 
     /**
@@ -125,19 +143,36 @@ public class CircleSapienSystem {
      */
     public void draw() {
         for (CircleSapien c : circleSapienSystem) {
-            c.draw();
+            if (!c.isDead())
+                c.draw();
         }
+
+        // for (int i = circleSapienSystem.size() - 1; i >= 0; i--) {
+        // circleSapienSystem.get(i).draw();
+        // }
     }
 
     public void killInfected() {
+        for (int i = circleSapienSystem.size() - 1; i >= 0; i--) {
+            if (circleSapienSystem.get(i).isDead()) {
+                circleSapienSystem.remove(i);
+            }
+        }
     }
 
     public void collide() {
         for (CircleSapien c : circleSapienSystem) {
-            CircleSapien b = c.getCollision();
-            if (b != null)
-                System.out.println(b + " crashed into " + c);
+            c.collide(circleSapienSystem);
+            if (c.isDead())
+                c.explode();
         }
+
+        // for (int i = circleSapienSystem.size() - 1; i >= 0; i--) {
+        // circleSapienSystem.get(i).collide(circleSapienSystem);
+        // if (circleSapienSystem.get(i).isDead()) {
+        // circleSapienSystem.remove(i);
+        // }
+        // }
     }
 
 }

@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import processing.core.PApplet;
 
 /**
@@ -15,8 +14,8 @@ public class Zombie extends CircleSapien {
      * @param x
      * @param y
      */
-    public Zombie(PApplet sketch, int x, int y, ArrayList<CircleSapien> circleSapienSystem) {
-        super(sketch, x, y, circleSapienSystem);
+    public Zombie(PApplet sketch, int x, int y) {
+        super(sketch, x, y);
         this.sketch = sketch;
         this.color = new Color(this.sketch).randomWarmColor();
     }

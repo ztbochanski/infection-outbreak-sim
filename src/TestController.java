@@ -22,9 +22,9 @@ public class TestController {
     }
 
     public void testSimulation() {
-        circleSapienSystem.testUpdate();
-        circleSapienSystem.draw();
         circleSapienSystem.collide();
+        circleSapienSystem.testMove();
+        circleSapienSystem.draw();
     }
 
 }

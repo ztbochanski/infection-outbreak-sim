@@ -14,7 +14,7 @@ class ParticleSystem {
         x = p.width / 2;
         y = p.height / 2;
         for (int i = 0; i < NUMBER_OF_PARTICLES; ++i) {
-            particles.add(new Particle(x, y,p));
+            particles.add(new Particle(x, y, p));
         }
     }
 
@@ -23,7 +23,7 @@ class ParticleSystem {
         this.y = y;
         particles = new ArrayList<Particle>();
         for (int i = 0; i < NUMBER_OF_PARTICLES; ++i) {
-            particles.add(new Particle(x, y,p));
+            particles.add(new Particle(x, y, p));
         }
     }
 
@@ -34,7 +34,8 @@ class ParticleSystem {
     }
 
     void draw() {
-        for (Particle p : particles) p.draw();
+        for (Particle p : particles)
+            p.draw();
     }
 
 }

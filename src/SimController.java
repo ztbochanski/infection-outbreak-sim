@@ -32,42 +32,9 @@ public class SimController {
     /**
      * move each member of the system to their next position
      */
-    public void simulateMovement() {
-        circleSapienSystem.update();
+    public void simulate() {
+        circleSapienSystem.move();
         circleSapienSystem.draw();
-        circleSapienSystem.collide();
     }
-
-    public void contactBehavior() {
-        for (int i = 0; i < circleSapienSystem.getSize(); i++) {
-            // circleSapienSystem.getSapien(i).collisionWith(circleSapienSystem.getSapienArray());
-            CircleSapien sapienA = circleSapienSystem.getSapien(i);
-            for (CircleSapien sapienB : circleSapienSystem.getSapienArray()) {
-                if (sapienA != sapienB && sapienA.madeContact(sapienB) && sapienA.getClass() != sapienB.getClass()) {
-                    if (sapienA.getClass() == Human.class) {
-                        System.out.println(sapienA.getClass() + " is a human");
-                    } else {
-                        System.out.println(sapienA.getClass() + " is a zombie");
-                    }
-
-                }
-            }
-        }
-    }
-
-    public void convertToZombie(CircleSapien human) {
-    }
-
-    // public void addZombie() {
-    // CircleSapien zombie = new Zombie(sketch, (int) sketch.random(sketch.width),
-    // (int) sketch.random((float) (sketch.height * .25)));
-    // circleSapienSystem.addSapien(zombie);
-    // }
-
-    // public void addHuman() {
-    // CircleSapien human = new Human(sketch, (int) sketch.random(sketch.width),
-    // sketch.height - (int) sketch.random((float) (sketch.height * .25)));
-    // circleSapienSystem.addSapien(human);
-    // }
 
 }

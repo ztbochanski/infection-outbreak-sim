@@ -24,10 +24,15 @@ public class Sketch extends PApplet {
     @Override
     public void setup() {
         background(BACKGROUND_COLOR);
+
+        // simulation
         simController = new SimController(this);
-        testController = new TestController(this);
         // simController.createSample(100, 25); // pop size, percentage zombies
+
+        // testing
+        testController = new TestController(this);
         testController.createTestSample();
+
     }
 
     /**
@@ -36,7 +41,9 @@ public class Sketch extends PApplet {
     @Override
     public void draw() {
         background(BACKGROUND_COLOR);
-        // simController.simulateMovement();
+        // simController.simulate();
+
+        // testing
         testController.testSimulation();
     }
 }

@@ -7,11 +7,12 @@ import processing.core.PApplet;
 public abstract class CircleSapien {
     private PApplet sketch;
     private ParticleSystem p;
-    private ArrayList<CircleSapien> circleSapienSystem;
+    // private ArrayList<CircleSapien> circleSapienSystem;
     private int x, y;
     private int diameter;
     private int color;
-    private boolean contact;
+    private boolean IS_CARRIER;
+    private boolean IS_DEAD;
 
     /**
      * Constructor takes the PApplet object and a position x and y
@@ -20,15 +21,15 @@ public abstract class CircleSapien {
      * @param x
      * @param y
      */
-    public CircleSapien(PApplet sketch, int x, int y, ArrayList<CircleSapien> circleSapienSystem) {
+    public CircleSapien(PApplet sketch, int x, int y) {
         this.sketch = sketch;
-        this.circleSapienSystem = circleSapienSystem;
+        // this.circleSapienSystem = circleSapienSystem;
         this.x = x;
         this.y = y;
-        this.p = new ParticleSystem(this.x, this.y, this.sketch);
         this.diameter = (int) this.sketch.random(10, 40);
         this.color = 0;
-        this.contact = false;
+        this.IS_CARRIER = false;
+        this.IS_DEAD = false;
 
     }
 
@@ -51,14 +52,6 @@ public abstract class CircleSapien {
      * kill behavior
      */
     public abstract void kill();
-
-    /**
-     * explode behavior
-     */
-    public void explode() {
-        p.draw();
-        p.update();
-    }
 
     /**
      * convert behavior
@@ -144,7 +137,7 @@ public abstract class CircleSapien {
      * @return contact
      */
     public boolean getContact() {
-        return this.contact;
+        return this.IS_CARRIER;
     }
 
     /**
@@ -152,56 +145,52 @@ public abstract class CircleSapien {
      * 
      * @param contact true or false
      */
-    public void setContact(boolean contact) {
-        this.contact = contact;
+    public void setContact(boolean IS_CARRIER) {
+        this.IS_CARRIER = IS_CARRIER;
+    }
+
+    public boolean isDead() {
+        return this.IS_DEAD;
     }
 
     /**
-     * madeContact uses distance formula for determine if the passed in object has a
-     * distance away of 0 or less. Sets the contact member variable true to flag if
-     * contact is made.
-     * 
-     * @param c CircleSapien object to check for a collision
-     * @return true if contact is made
+     * explode behavior
      */
-    public boolean madeContact(CircleSapien c) {
-        double dist = Math.sqrt(Math.pow((c.getX() - this.getX()), 2) + Math.pow((c.getY() - this.getY()), 2));
-
-        double distanceFormula = dist - ((this.getDiameter() / 2) - (c.getDiameter() / 2));
-
-        if (distanceFormula <= 0 && !contact) {
-            setContact(true);
-        }
-        return contact;
+    public void explode() {
+        p.draw();
+        p.update();
     }
 
-    // public CircleSapien getCollision() {
-    // for (int i = 0; i < circleSapienSystem.size(); i++) {
-    // CircleSapien c = circleSapienSystem.get(i);
-    // double dist = Math.sqrt(Math.pow((c.getX() - this.getX()), 2) +
-    // Math.pow((c.getY() - this.getY()), 2))
-    // - ((this.getDiameter() / 2) - (c.getDiameter() / 2));
-    // if (dist < 0 && c.getClass() != this.getClass() && c != this && !contact) {
-    // setContact(true);
-    // return c;
-    // }
-    // }
-    // return null;
-    // }
-
     /**
-     * set contact flag on object and return the object that this touched
+     * explosion using particle system
      * 
-     * @return object that came in contact with this one
+     * @param x
+     * @param y
+     * @param sketch
      */
-    public CircleSapien getCollision() {
+    public void createExplosion(int x, int y, PApplet sketch) {
+        this.p = new ParticleSystem(x, y, sketch);
+    }
+
+    public void collide(ArrayList<CircleSapien> circleSapienSystem) {
         for (CircleSapien c : circleSapienSystem) {
-            if (getDistance(c) < 0 && c.getClass() != this.getClass() && c != this && !contact) {
-                setContact(true);
-                return c;
+            if (getDistance(c) < 0 && c.getClass() != this.getClass() && c != this && !IS_CARRIER) {
+                IS_CARRIER = true;
+                IS_DEAD = true;
+                createExplosion(x, y, sketch);
             }
         }
-        return null;
+
+        // for (int i = circleSapienSystem.size() - 1; i >= 0; i--) {
+        // CircleSapien c = circleSapienSystem.get(i);
+        // if (getDistance(c) < 0 && c.getClass() != this.getClass() && c != this &&
+        // !MADE_CONTACT) {
+        // setContact(true);
+        // // createExplosion(x, y, sketch);
+        // return c;
+        // }
+        // }
+        // return null;
     }
 
     /**
@@ -212,18 +201,9 @@ public abstract class CircleSapien {
      * @return distance
      */
     public double getDistance(CircleSapien c) {
-        return Math.sqrt(Math.pow((c.getX() - this.getX()), 2) + Math.pow((c.getY() - this.getY()), 2))
-                - ((this.getDiameter() / 2) - (c.getDiameter() / 2));
+        return Math.sqrt(Math.pow((c.getX() - x), 2) + Math.pow((c.getY() - y), 2))
+                - ((diameter / 2) - (c.getDiameter() / 2));
     }
-
-    // public void collisionWith(ArrayList<CircleSapien> circleSapienSystem) {
-    // for (CircleSapien other : circleSapienSystem) {
-    // if (other != this && this.madeContact(other) && this.getClass() !=
-    // other.getClass()) {
-    // System.out.println("passed in sapien c made contact with " + other);
-    // }
-    // }
-    // }
 
     /**
      * Takes a CircleSapien object and compares sizes
