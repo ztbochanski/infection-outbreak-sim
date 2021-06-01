@@ -1,15 +1,14 @@
 import processing.core.PApplet;
 
 /**
- * This program simulates humans (circles) moving across the canvas towards
- * zombies (more circles), the circles interact with each other and either
- * explode or are turned into additional zombies. The scores or total count is
- * kept on the top and bottom of the screen.
+ * This program simulates a very basic pandemic scenario between humans and
+ * zombies. The program allows for the the adjustment of a few simple parameters
+ * that adjust probabilities and effect the outcome of each scenario. The
+ * project represents some principles found in epidemiology.
  *
- * CS162 Final Project
  *
  * @author Zachary Bochanski
- * @version 1.1
+ * @version 1.2
  * @since 2021.05.19
  */
 public class Main {

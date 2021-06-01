@@ -28,7 +28,13 @@ public class TestController {
     }
 
     public void testInteraction() {
-        circleSapienSystem.setInfected();
+        circleSapienSystem.testInteraction();
+    }
+
+    public void runModel(float deathRate, float incubationRate, float resistanceRate) {
+        int exposedCount = circleSapienSystem.getExposed();
+        // float deathCount = (getContactCount()*(deathRate/100));
+
     }
 
     public void clean() {

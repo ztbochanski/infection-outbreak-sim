@@ -38,7 +38,7 @@ public class Sketch extends PApplet {
             testController.createTestSample();
         } else {
             simController = new SimController(this);
-            simController.createSample(400, 50); // pop size, percentage zombies
+            simController.createSample(400, 50); // (pop size, percentage infected)
         }
     }
 
@@ -51,7 +51,7 @@ public class Sketch extends PApplet {
         if (TEST_MODE) {
             testController.testSimulation();
             testController.testInteraction();
-            // testController.clean();
+            testController.runModel(25, 50, 25); // (death rate, incubation rate, resistance rate)
         } else {
             simController.simulate();
         }

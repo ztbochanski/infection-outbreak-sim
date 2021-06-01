@@ -11,7 +11,7 @@ public abstract class CircleSapien {
     private int x, y;
     private int diameter;
     private int color;
-    private boolean IS_CONTACT;
+    private boolean IS_EXPOSED;
     private boolean IS_DEAD;
 
     /**
@@ -27,7 +27,7 @@ public abstract class CircleSapien {
         this.y = y;
         this.diameter = (int) this.sketch.random(10, 40);
         this.color = 0;
-        this.IS_CONTACT = false;
+        this.IS_EXPOSED = false;
         this.IS_DEAD = false;
 
     }
@@ -45,7 +45,7 @@ public abstract class CircleSapien {
         this.y = y;
         this.diameter = diameter;
         this.color = 0;
-        this.IS_CONTACT = false;
+        this.IS_EXPOSED = false;
         this.IS_DEAD = false;
 
     }
@@ -209,12 +209,12 @@ public abstract class CircleSapien {
     }
 
     /**
-     * has the object made contact with another from a different class
+     * has the object made contact and exposed to infected from a different class
      * 
-     * @return true if contact
+     * @return true if object exposed to the infection
      */
-    public boolean madeContact() {
-        return this.IS_CONTACT;
+    public boolean isExposed() {
+        return this.IS_EXPOSED;
     }
 
     /**
@@ -250,8 +250,8 @@ public abstract class CircleSapien {
     public void setContactFlag(ArrayList<CircleSapien> circleSapienSystem) {
         for (CircleSapien c : circleSapienSystem) {
             // if(touching && !same class && not itself && !contact flag)
-            if (getDistance(c) < 0 && c.getClass() != this.getClass() && c != this && !IS_CONTACT) {
-                IS_CONTACT = true;
+            if (getDistance(c) < 0 && c.getClass() != this.getClass() && c != this && !IS_EXPOSED) {
+                IS_EXPOSED = true;
                 setContactWith(c);
                 createExplosion(x, y, sketch);
             }

@@ -163,10 +163,27 @@ public class CircleSapienSystem {
         }
     }
 
-    public void setInfected() {
+    /**
+     * get the number who were exposed to the infection each step
+     * 
+     * @return number of exposed objects
+     */
+    public int getExposed() {
+        int exposedCount = 0;
+        for (CircleSapien c : circleSapienSystem) {
+            if (c.isExposed())
+                exposedCount++;
+        }
+        return exposedCount;
+    }
+
+    /**
+     * current interaction or method being tested run here in test mode
+     */
+    public void testInteraction() {
         for (int i = circleSapienSystem.size() - 1; i >= 0; i--) {
             CircleSapien c = circleSapienSystem.get(i);
-            if (c.madeContact() && c.getClass() == Human.class) {
+            if (c.isExposed() && c.getClass() == Human.class) {
                 circleSapienSystem.add(new Zombie(sketch, c.getX(), c.getY(), c.getDiameter()));
                 circleSapienSystem.remove(i);
             }
