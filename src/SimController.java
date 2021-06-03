@@ -4,12 +4,12 @@ import processing.core.PApplet;
  * Simulator class creates a population system and controls the simulation
  */
 public class SimController {
-    CircleSapienSystem circleSapienSystem;
+    SapienSystem SapienSystem;
     PApplet sketch;
 
     public SimController(PApplet sketch) {
         this.sketch = sketch;
-        circleSapienSystem = new CircleSapienSystem(this.sketch);
+        SapienSystem = new SapienSystem(this.sketch);
     }
 
     /**
@@ -20,10 +20,10 @@ public class SimController {
         float targetZombiePop = (popSize * (zombiePercentage / 100));
         while (totalCount < popSize) {
             if (totalCount < targetZombiePop) {
-                circleSapienSystem.addRandZombie();
+                SapienSystem.addRandZombie();
                 totalCount++;
             } else {
-                circleSapienSystem.addRandHuman();
+                SapienSystem.addRandHuman();
                 totalCount++;
             }
         }
@@ -33,9 +33,9 @@ public class SimController {
      * move each member of the system to their next position
      */
     public void simulate() {
-        circleSapienSystem.setContactFlag();
-        circleSapienSystem.move();
-        circleSapienSystem.draw();
+        SapienSystem.setContactFlag();
+        SapienSystem.move();
+        SapienSystem.draw();
     }
 
 }

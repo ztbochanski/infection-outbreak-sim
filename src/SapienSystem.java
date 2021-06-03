@@ -1,24 +1,26 @@
 import java.util.ArrayList;
 
+import javax.swing.event.CaretListener;
+
 import processing.core.PApplet;
 
 /**
- * CircleSapienSystem class represents a system of CircleSapien Objects
+ * SapienSystem class represents a system of Sapien Objects
  */
-public class CircleSapienSystem {
+public class SapienSystem {
     PApplet sketch;
-    private ArrayList<CircleSapien> circleSapienSystem;
+    private ArrayList<Sapien> SapienSystem;
 
     /**
-     * CircleSapienSystem constructor creates and array list to store sapien objects
+     * SapienSystem constructor creates and array list to store sapien objects
      */
-    public CircleSapienSystem(PApplet sketch) {
+    public SapienSystem(PApplet sketch) {
         this.sketch = sketch;
-        this.circleSapienSystem = new ArrayList<CircleSapien>();
+        this.SapienSystem = new ArrayList<Sapien>();
     }
 
-    public ArrayList<CircleSapien> getSapienArray() {
-        return this.circleSapienSystem;
+    public ArrayList<Sapien> getSapienArray() {
+        return this.SapienSystem;
     }
 
     /**
@@ -27,7 +29,7 @@ public class CircleSapienSystem {
      * @return size
      */
     public int getSize() {
-        return circleSapienSystem.size();
+        return SapienSystem.size();
     }
 
     /**
@@ -35,8 +37,8 @@ public class CircleSapienSystem {
      * 
      * @param c object
      */
-    public void addSapien(CircleSapien c) {
-        circleSapienSystem.add(c);
+    public void addSapien(Sapien c) {
+        SapienSystem.add(c);
     }
 
     /**
@@ -45,7 +47,7 @@ public class CircleSapienSystem {
      * @param index
      */
     public void removeSapien(int index) {
-        circleSapienSystem.remove(index);
+        SapienSystem.remove(index);
     }
 
     /**
@@ -54,8 +56,8 @@ public class CircleSapienSystem {
      * @param index
      * @return
      */
-    public CircleSapien getSapien(int index) {
-        return circleSapienSystem.get(index);
+    public Sapien getSapien(int index) {
+        return SapienSystem.get(index);
     }
 
     /**
@@ -64,8 +66,8 @@ public class CircleSapienSystem {
      * @param c
      * @return index
      */
-    public int getIndexOf(CircleSapien c) {
-        return circleSapienSystem.indexOf(c);
+    public int getIndexOf(Sapien c) {
+        return SapienSystem.indexOf(c);
     }
 
     /**
@@ -74,8 +76,8 @@ public class CircleSapienSystem {
      * @param index
      * @param c
      */
-    public void setSapienAt(int index, CircleSapien c) {
-        circleSapienSystem.set(index, c);
+    public void setSapienAt(int index, Sapien c) {
+        SapienSystem.set(index, c);
     }
 
     /**
@@ -118,7 +120,7 @@ public class CircleSapienSystem {
      * move each object in the system
      */
     public void move() {
-        for (CircleSapien c : circleSapienSystem) {
+        for (Sapien c : SapienSystem) {
             c.move();
         }
     }
@@ -127,7 +129,7 @@ public class CircleSapienSystem {
      * move each object in the system with constant motion
      */
     public void testMove() {
-        for (CircleSapien c : circleSapienSystem) {
+        for (Sapien c : SapienSystem) {
             c.testMove();
         }
     }
@@ -136,7 +138,7 @@ public class CircleSapienSystem {
      * draw each living object in the system
      */
     public void draw() {
-        for (CircleSapien c : circleSapienSystem) {
+        for (Sapien c : SapienSystem) {
             if (!c.isDead())
                 c.draw();
         }
@@ -146,9 +148,9 @@ public class CircleSapienSystem {
      * remove object's flagged as dead from the array
      */
     public void removeDead() {
-        for (int i = circleSapienSystem.size() - 1; i >= 0; i--) {
-            if (circleSapienSystem.get(i).isDead()) {
-                circleSapienSystem.remove(i);
+        for (int i = SapienSystem.size() - 1; i >= 0; i--) {
+            if (SapienSystem.get(i).isDead()) {
+                SapienSystem.remove(i);
             }
         }
     }
@@ -158,8 +160,8 @@ public class CircleSapienSystem {
      * flags
      */
     public void setContactFlag() {
-        for (CircleSapien c : circleSapienSystem) {
-            c.setContactFlag(circleSapienSystem);
+        for (Sapien c : SapienSystem) {
+            c.setContactFlag(SapienSystem);
         }
     }
 
@@ -168,24 +170,33 @@ public class CircleSapienSystem {
      * 
      * @return number of exposed objects
      */
-    public int getExposed() {
+    public int getExposedCount() {
         int exposedCount = 0;
-        for (CircleSapien c : circleSapienSystem) {
-            if (c.isExposed())
+        for (Sapien c : SapienSystem) {
+            if (c.isExposed() && c.getClass() == Human.class)
                 exposedCount++;
         }
         return exposedCount;
     }
 
-    /**
-     * current interaction or method being tested run here in test mode
-     */
-    public void testInteraction() {
-        for (int i = circleSapienSystem.size() - 1; i >= 0; i--) {
-            CircleSapien c = circleSapienSystem.get(i);
-            if (c.isExposed() && c.getClass() == Human.class) {
-                circleSapienSystem.add(new Zombie(sketch, c.getX(), c.getY(), c.getDiameter()));
-                circleSapienSystem.remove(i);
+    public void testActionOnContact(String action) {
+        for (int i = SapienSystem.size() - 1; i >= 0; i--) {
+            Sapien c = SapienSystem.get(i);
+            switch (action) {
+                case "DIE":
+                    if (c.isExposed() && c.getClass() == Human.class)
+                        c.die();
+                    break;
+                case "IMMUNE":
+                    if (c.isExposed() && c.getClass() == Human.class)
+                        c.defend();
+                    break;
+                case "CARRIER":
+                    if (c.isExposed() && c.getClass() == Human.class) {
+                        SapienSystem.add(new Zombie(sketch, c.getX(), c.getY(), c.getDiameter()));
+                        SapienSystem.remove(i);
+                    }
+                    break;
             }
         }
     }

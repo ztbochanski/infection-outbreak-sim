@@ -50,8 +50,8 @@ public class Sketch extends PApplet {
         background(BACKGROUND_COLOR);
         if (TEST_MODE) {
             testController.testSimulation();
-            testController.testInteraction();
-            testController.runModel(25, 50, 25); // (death rate, incubation rate, resistance rate)
+            // testController.runModel(25, 50, 25); // (death rate, incubation rate,
+            // resistance rate)
         } else {
             simController.simulate();
         }

@@ -3,7 +3,7 @@ import processing.core.PApplet;
 /**
  * The Zombie class models the behaviors of zombie specific circle
  */
-public class Zombie extends CircleSapien {
+public class Zombie extends Sapien {
     PApplet sketch;
     private int color;
 

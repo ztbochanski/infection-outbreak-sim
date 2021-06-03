@@ -2,17 +2,17 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 
 /**
- * The CircleSapien class models the behaviors of every homo sapien like circle
+ * The Sapien class models the behaviors of every homo sapien like circle
  */
-public abstract class CircleSapien {
+public abstract class Sapien {
     private PApplet sketch;
     private ParticleSystem p;
-    private CircleSapien contactWith;
+    private Sapien contactWith;
     private int x, y;
     private int diameter;
     private int color;
-    private boolean IS_EXPOSED;
-    private boolean IS_DEAD;
+    private boolean isExposed;
+    private boolean isDead;
 
     /**
      * Constructor takes the PApplet object and a position x and y
@@ -21,14 +21,14 @@ public abstract class CircleSapien {
      * @param x
      * @param y
      */
-    public CircleSapien(PApplet sketch, int x, int y) {
+    public Sapien(PApplet sketch, int x, int y) {
         this.sketch = sketch;
         this.x = x;
         this.y = y;
         this.diameter = (int) this.sketch.random(10, 40);
         this.color = 0;
-        this.IS_EXPOSED = false;
-        this.IS_DEAD = false;
+        this.isExposed = false;
+        this.isDead = false;
 
     }
 
@@ -39,14 +39,14 @@ public abstract class CircleSapien {
      * @param x
      * @param y
      */
-    public CircleSapien(PApplet sketch, int x, int y, int diameter) {
+    public Sapien(PApplet sketch, int x, int y, int diameter) {
         this.sketch = sketch;
         this.x = x;
         this.y = y;
         this.diameter = diameter;
         this.color = 0;
-        this.IS_EXPOSED = false;
-        this.IS_DEAD = false;
+        this.isExposed = false;
+        this.isDead = false;
 
     }
 
@@ -144,16 +144,16 @@ public abstract class CircleSapien {
      * @return isDead true or false
      */
     public boolean isDead() {
-        return this.IS_DEAD;
+        return this.isDead;
     }
 
     /**
      * set object state true or false
      * 
-     * @param IS_DEAD
+     * @param isDead
      */
-    public void setDead(boolean IS_DEAD) {
-        this.IS_DEAD = IS_DEAD;
+    public void setDead(boolean isDead) {
+        this.isDead = isDead;
     }
 
     /**
@@ -169,7 +169,7 @@ public abstract class CircleSapien {
      */
     public void die() {
         explode();
-        IS_DEAD = true;
+        isDead = true;
     }
 
     /**
@@ -195,16 +195,16 @@ public abstract class CircleSapien {
      * 
      * @param c the object
      */
-    public void setContactWith(CircleSapien c) {
+    public void setContactWith(Sapien c) {
         this.contactWith = c;
     }
 
     /**
      * get obj that this one made contact with
      * 
-     * @return CircleSapien object that made contact
+     * @return Sapien object that made contact
      */
-    public CircleSapien getContactWith() {
+    public Sapien getContactWith() {
         return this.contactWith;
     }
 
@@ -214,7 +214,7 @@ public abstract class CircleSapien {
      * @return true if object exposed to the infection
      */
     public boolean isExposed() {
-        return this.IS_EXPOSED;
+        return this.isExposed;
     }
 
     /**
@@ -224,13 +224,23 @@ public abstract class CircleSapien {
      * @param c object to compare to this
      * @return distance
      */
-    public double getDistance(CircleSapien c) {
+    public double getDistance(Sapien c) {
         return Math.sqrt(Math.pow((c.getX() - x), 2) + Math.pow((c.getY() - y), 2))
                 - ((diameter / 2) + (c.getDiameter() / 2));
     }
 
     /**
-     * Takes a CircleSapien object and compares sizes
+     * check to see if object are touching using the distance formula
+     * 
+     * @param c the other object
+     * @return
+     */
+    public boolean isTouching(Sapien s) {
+        return (PApplet.dist(this.x, this.y, s.getX(), s.getY()) < 0);
+    }
+
+    /**
+     * Takes a Sapien object and compares sizes
      * 
      * @return true if the object is larger
      */
@@ -245,13 +255,13 @@ public abstract class CircleSapien {
     /**
      * set the state on this object regarding contact
      * 
-     * @param circleSapienSystem all objects to check
+     * @param SapienSystem all objects to check
      */
-    public void setContactFlag(ArrayList<CircleSapien> circleSapienSystem) {
-        for (CircleSapien c : circleSapienSystem) {
+    public void setContactFlag(ArrayList<Sapien> SapienSystem) {
+        for (Sapien c : SapienSystem) {
             // if(touching && !same class && not itself && !contact flag)
-            if (getDistance(c) < 0 && c.getClass() != this.getClass() && c != this && !IS_EXPOSED) {
-                IS_EXPOSED = true;
+            if (getDistance(c) < 0 && c.getClass() != this.getClass() && c != this && !isExposed) {
+                isExposed = true;
                 setContactWith(c);
                 createExplosion(x, y, sketch);
             }

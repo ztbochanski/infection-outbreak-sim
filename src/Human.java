@@ -3,7 +3,7 @@ import processing.core.PApplet;
 /**
  * The Human class models the behaviors of human specific circle
  */
-public class Human extends CircleSapien {
+public class Human extends Sapien {
     PApplet sketch;
     private int color;
 

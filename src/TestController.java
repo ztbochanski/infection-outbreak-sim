@@ -4,41 +4,44 @@ import processing.core.PApplet;
  * Test class creates a population system and controls the test environment
  */
 public class TestController {
-    CircleSapienSystem circleSapienSystem;
+    SapienSystem SapienSystem;
     PApplet sketch;
 
     public TestController(PApplet sketch) {
         this.sketch = sketch;
-        circleSapienSystem = new CircleSapienSystem(this.sketch);
+        SapienSystem = new SapienSystem(this.sketch);
     }
 
     public void createTestSample() {
-        circleSapienSystem.addTestHuman(100, 130);
-        circleSapienSystem.addTestHuman(200, 160);
-        circleSapienSystem.addTestHuman(300, 190);
-        circleSapienSystem.addTestZombie(100, 100);
-        circleSapienSystem.addTestZombie(200, 100);
-        circleSapienSystem.addTestZombie(300, 100);
+        SapienSystem.addTestHuman(100, 130);
+        SapienSystem.addTestHuman(200, 160);
+        SapienSystem.addTestHuman(300, 190);
+        SapienSystem.addTestZombie(100, 100);
+        SapienSystem.addTestZombie(200, 100);
+        SapienSystem.addTestZombie(300, 100);
     }
 
     public void testSimulation() {
-        circleSapienSystem.setContactFlag();
-        circleSapienSystem.testMove();
-        circleSapienSystem.draw();
-    }
-
-    public void testInteraction() {
-        circleSapienSystem.testInteraction();
+        SapienSystem.setContactFlag();
+        SapienSystem.testMove();
+        SapienSystem.draw();
+        SapienSystem.testActionOnContact("DIE"); // DIE, IMMUNE, CARRIER
     }
 
     public void runModel(float deathRate, float incubationRate, float resistanceRate) {
-        int exposedCount = circleSapienSystem.getExposed();
-        // float deathCount = (getContactCount()*(deathRate/100));
-
+        int exposedCount = SapienSystem.getExposedCount();
+        if (exposedCount > 0) {
+            int deathCount = (int) (exposedCount * (deathRate / 100));
+            int carrierCount = (int) (exposedCount * (incubationRate / 100));
+            int immuneCount = (int) (exposedCount * (resistanceRate / 100));
+            // SapienSystem.applyDeathCount(deathCount);
+            // SapienSystem.applyCarrierCount(deathCount);
+            // SapienSystem.applyImmuneCount(deathCount);
+        }
     }
 
     public void clean() {
-        circleSapienSystem.removeDead();
+        SapienSystem.removeDead();
     }
 
 }
