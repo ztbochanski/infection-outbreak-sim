@@ -6,18 +6,18 @@ import processing.core.PApplet;
  */
 public class SapienSystem {
     PApplet sketch;
-    private ArrayList<Sapien> SapienSystem;
+    private ArrayList<Sapien> sapienSystem;
 
     /**
      * SapienSystem constructor creates and array list to store sapien objects
      */
     public SapienSystem(PApplet sketch) {
         this.sketch = sketch;
-        this.SapienSystem = new ArrayList<Sapien>();
+        this.sapienSystem = new ArrayList<Sapien>();
     }
 
     public ArrayList<Sapien> getSapienArray() {
-        return this.SapienSystem;
+        return this.sapienSystem;
     }
 
     /**
@@ -26,7 +26,7 @@ public class SapienSystem {
      * @return size
      */
     public int getSize() {
-        return SapienSystem.size();
+        return sapienSystem.size();
     }
 
     /**
@@ -35,7 +35,7 @@ public class SapienSystem {
      * @param c object
      */
     public void addSapien(Sapien c) {
-        SapienSystem.add(c);
+        sapienSystem.add(c);
     }
 
     /**
@@ -44,7 +44,7 @@ public class SapienSystem {
      * @param index
      */
     public void removeSapien(int index) {
-        SapienSystem.remove(index);
+        sapienSystem.remove(index);
     }
 
     /**
@@ -54,7 +54,7 @@ public class SapienSystem {
      * @return
      */
     public Sapien getSapien(int index) {
-        return SapienSystem.get(index);
+        return sapienSystem.get(index);
     }
 
     /**
@@ -64,7 +64,7 @@ public class SapienSystem {
      * @return index
      */
     public int getIndexOf(Sapien c) {
-        return SapienSystem.indexOf(c);
+        return sapienSystem.indexOf(c);
     }
 
     /**
@@ -74,7 +74,7 @@ public class SapienSystem {
      * @param c
      */
     public void setSapienAt(int index, Sapien c) {
-        SapienSystem.set(index, c);
+        sapienSystem.set(index, c);
     }
 
     /**
@@ -117,7 +117,7 @@ public class SapienSystem {
      * move each object in the system
      */
     public void move() {
-        for (Sapien c : SapienSystem) {
+        for (Sapien c : sapienSystem) {
             c.move();
         }
     }
@@ -126,7 +126,7 @@ public class SapienSystem {
      * move each object in the system with constant motion
      */
     public void testMove() {
-        for (Sapien c : SapienSystem) {
+        for (Sapien c : sapienSystem) {
             c.testMove();
         }
     }
@@ -135,7 +135,7 @@ public class SapienSystem {
      * draw each living object in the system
      */
     public void draw() {
-        for (Sapien c : SapienSystem) {
+        for (Sapien c : sapienSystem) {
             if (!c.isDead())
                 c.draw();
         }
@@ -145,9 +145,9 @@ public class SapienSystem {
      * remove object's flagged as dead from the array
      */
     public void removeDead() {
-        for (int i = SapienSystem.size() - 1; i >= 0; i--) {
-            if (SapienSystem.get(i).isDead()) {
-                SapienSystem.remove(i);
+        for (int i = sapienSystem.size() - 1; i >= 0; i--) {
+            if (sapienSystem.get(i).isDead()) {
+                sapienSystem.remove(i);
             }
         }
     }
@@ -157,8 +157,8 @@ public class SapienSystem {
      * flags
      */
     public void setContactFlag() {
-        for (Sapien c : SapienSystem) {
-            c.setContactFlag(SapienSystem);
+        for (Sapien c : sapienSystem) {
+            c.setContactFlag(sapienSystem);
         }
     }
 
@@ -169,7 +169,7 @@ public class SapienSystem {
      */
     public int getExposedCount() {
         int exposedCount = 0;
-        for (Sapien c : SapienSystem) {
+        for (Sapien c : sapienSystem) {
             if (c.isExposed() && c.getClass() == Human.class)
                 exposedCount++;
         }
@@ -177,8 +177,8 @@ public class SapienSystem {
     }
 
     public void testActionOnContact(String action) {
-        for (int i = SapienSystem.size() - 1; i >= 0; i--) {
-            Sapien c = SapienSystem.get(i);
+        for (int i = sapienSystem.size() - 1; i >= 0; i--) {
+            Sapien c = sapienSystem.get(i);
             switch (action) {
                 case "DIE":
                     if (c.isExposed() && c.getClass() == Human.class)
@@ -190,11 +190,17 @@ public class SapienSystem {
                     break;
                 case "CARRIER":
                     if (c.isExposed() && c.getClass() == Human.class) {
-                        SapienSystem.add(new Zombie(sketch, c.getX(), c.getY(), c.getDiameter()));
-                        SapienSystem.remove(i);
+                        sapienSystem.add(new Zombie(sketch, c.getX(), c.getY(), c.getDiameter()));
+                        sapienSystem.remove(i);
                     }
                     break;
             }
+        }
+    }
+
+    public void actionOnContact() {
+        for (Sapien s : sapienSystem) {
+            s.draw();
         }
     }
 

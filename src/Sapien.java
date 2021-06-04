@@ -236,7 +236,7 @@ public abstract class Sapien {
      * @return
      */
     public boolean isTouching(Sapien s) {
-        return (PApplet.dist(this.x, this.y, s.getX(), s.getY()) < 0);
+        return (PApplet.dist(this.x, this.y, s.getX(), s.getY()) < ((this.diameter / 2) + (s.getDiameter() / 2)));
     }
 
     /**
