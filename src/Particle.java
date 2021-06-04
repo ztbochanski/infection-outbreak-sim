@@ -1,47 +1,51 @@
 import processing.core.PApplet;
+
 class Particle {
 
-    PApplet p;
+    private static final double ACCELERATION = 0.1;
+    private static final float MIN_XVELOCITY = -2;
+    private static final float MAX_XVELOCITY = 2;
+    private static final float MIN_YVELOCITY = -4;
+    private static final float MAX_YVELOCITY = 0;
+    private static final float MIN_RADIUS = 2;
+    private static final float MAX_RADIUS = 10;
+    private static final float ALPHA = 75;
 
-    final double ACCELERATION = 0.1;
+    private PApplet sketch;
+    private float x;
+    private float y;
+    private float xVelocity;
+    private float yVelocity;
+    private int color;
+    private float radius;
 
-    float x;
-    float y;
-    float xVelocity;
-    float yVelocity;
-    int c;
-    float size;
-
-    Particle(PApplet p) {
-        x = p.mouseX;
-        y = p.mouseY;
-        this.p=p;
-        xVelocity = p.random(-5, 5);
-        yVelocity = p.random(-4, 0);
-        c = p.color(p.random(100, 255), p.random(100, 255), p.random(100, 255), 75);
-        size = p.random(10, 20);
+    public Particle(PApplet sketch) {
+        this(sketch.mouseX, sketch.mouseY, sketch);
     }
 
-    Particle(int x, int y, PApplet p) {
+    public Particle(int x, int y, PApplet sketch) {
         this.x = x;
         this.y = y;
-        this.p=p;
-        xVelocity = p.random(-2, 2);
-        yVelocity = p.random(-4, 0);
-        c = p.color(p.random(100, 255), p.random(100, 255), p.random(100, 255), 75);
-        size = p.random(2, 10);
+        this.sketch = sketch;
+        xVelocity = sketch.random(MIN_XVELOCITY, MAX_XVELOCITY);
+        yVelocity = sketch.random(MIN_YVELOCITY, MAX_YVELOCITY);
+        color = sketch.color(sketch.random(255), sketch.random(255), sketch.random(255), ALPHA);
+        radius = sketch.random(MIN_RADIUS, MAX_RADIUS);
     }
 
-    void draw() {
-        p.stroke(150);
-        p.fill(c);
-        p.ellipse(x, y, size, size);
+    public void draw() {
+        sketch.stroke(150);
+        sketch.fill(color);
+        sketch.ellipse(x, y, radius, radius);
     }
 
-    void move() {
+    public void move() {
         x += xVelocity;
         y += yVelocity;
         yVelocity += ACCELERATION;
     }
 
+    public boolean isOffScreen() {
+        return y + radius > sketch.height;
+    }
 }

@@ -187,7 +187,7 @@ public abstract class Sapien {
      * @param sketch
      */
     public void createExplosion(int x, int y, PApplet sketch) {
-        this.p = new ParticleSystem(x, y, sketch);
+        this.p = new ParticleSystem(x, y, 50, sketch);
     }
 
     /**
