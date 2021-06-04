@@ -15,6 +15,7 @@ public class SapienSystem {
     public SapienSystem(PApplet sketch) {
         this.sketch = sketch;
         this.sapiens = new ArrayList<Sapien>();
+        this.particleSystems = new ArrayList<ParticleSystem>();
     }
 
     /**
@@ -204,9 +205,8 @@ public class SapienSystem {
                         if (sapiens.get(i).isTouching(sapiens.get(j))) {
                             if (sapiens.get(i).isLarger(sapiens.get(j))) {
                                 Sapien z = sapiens.get(j);
-                                ParticleSystem p = new ParticleSystem(z.getX(), z.getY(), z.getDiameter() * 10, sketch);
-                                p.draw();
-
+                                ParticleSystem p = new ParticleSystem(z.getX(), z.getY(), z.getDiameter() * 2, sketch);
+                                particleSystems.add(p);
                                 sapiens.remove(j);
                             } else
                                 sapiens.remove(i);
@@ -214,6 +214,18 @@ public class SapienSystem {
                     }
                 }
             }
+        }
+    }
+
+    public void updateParticles() {
+        for (ParticleSystem p : particleSystems) {
+            p.update();
+        }
+    }
+
+    public void drawParticles() {
+        for (ParticleSystem p : particleSystems) {
+            p.draw();
         }
     }
 

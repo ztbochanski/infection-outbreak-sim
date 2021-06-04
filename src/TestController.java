@@ -23,6 +23,8 @@ public class TestController {
 
     public void testSimulation() {
         sapienSystem.actionOnContact();
+        sapienSystem.drawParticles();
+        sapienSystem.updateParticles();
         sapienSystem.testMove();
         sapienSystem.draw();
     }
