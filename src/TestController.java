@@ -38,8 +38,4 @@ public class TestController {
         }
     }
 
-    public void clean() {
-        sapienSystem.removeDead();
-    }
-
 }

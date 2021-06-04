@@ -142,17 +142,6 @@ public class SapienSystem {
     }
 
     /**
-     * remove object's flagged as dead from the array
-     */
-    public void removeDead() {
-        for (int i = sapienSystem.size() - 1; i >= 0; i--) {
-            if (sapienSystem.get(i).isDead()) {
-                sapienSystem.remove(i);
-            }
-        }
-    }
-
-    /**
      * for every frame check contact among each object in the array, set object
      * flags
      */
