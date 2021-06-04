@@ -17,10 +17,6 @@ public class SapienSystem {
         this.sapiens = new ArrayList<Sapien>();
     }
 
-    public ArrayList<Sapien> getSapienArray() {
-        return this.sapiens;
-    }
-
     /**
      * get size of the system
      * 
@@ -210,7 +206,7 @@ public class SapienSystem {
                                 Sapien z = sapiens.get(j);
                                 ParticleSystem p = new ParticleSystem(z.getX(), z.getY(), z.getDiameter() * 10, sketch);
                                 p.draw();
-                                p.update();
+
                                 sapiens.remove(j);
                             } else
                                 sapiens.remove(i);
