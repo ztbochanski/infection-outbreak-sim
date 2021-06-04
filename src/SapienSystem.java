@@ -6,18 +6,19 @@ import processing.core.PApplet;
  */
 public class SapienSystem {
     PApplet sketch;
-    private ArrayList<Sapien> sapienSystem;
+    private ArrayList<Sapien> sapiens;
+    private ArrayList<ParticleSystem> particleSystems;
 
     /**
      * SapienSystem constructor creates and array list to store sapien objects
      */
     public SapienSystem(PApplet sketch) {
         this.sketch = sketch;
-        this.sapienSystem = new ArrayList<Sapien>();
+        this.sapiens = new ArrayList<Sapien>();
     }
 
     public ArrayList<Sapien> getSapienArray() {
-        return this.sapienSystem;
+        return this.sapiens;
     }
 
     /**
@@ -26,7 +27,7 @@ public class SapienSystem {
      * @return size
      */
     public int getSize() {
-        return sapienSystem.size();
+        return sapiens.size();
     }
 
     /**
@@ -35,7 +36,7 @@ public class SapienSystem {
      * @param c object
      */
     public void addSapien(Sapien c) {
-        sapienSystem.add(c);
+        sapiens.add(c);
     }
 
     /**
@@ -44,7 +45,7 @@ public class SapienSystem {
      * @param index
      */
     public void removeSapien(int index) {
-        sapienSystem.remove(index);
+        sapiens.remove(index);
     }
 
     /**
@@ -54,7 +55,7 @@ public class SapienSystem {
      * @return
      */
     public Sapien getSapien(int index) {
-        return sapienSystem.get(index);
+        return sapiens.get(index);
     }
 
     /**
@@ -64,7 +65,7 @@ public class SapienSystem {
      * @return index
      */
     public int getIndexOf(Sapien c) {
-        return sapienSystem.indexOf(c);
+        return sapiens.indexOf(c);
     }
 
     /**
@@ -74,7 +75,7 @@ public class SapienSystem {
      * @param c
      */
     public void setSapienAt(int index, Sapien c) {
-        sapienSystem.set(index, c);
+        sapiens.set(index, c);
     }
 
     /**
@@ -117,7 +118,7 @@ public class SapienSystem {
      * move each object in the system
      */
     public void move() {
-        for (Sapien c : sapienSystem) {
+        for (Sapien c : sapiens) {
             c.move();
         }
     }
@@ -126,7 +127,7 @@ public class SapienSystem {
      * move each object in the system with constant motion
      */
     public void testMove() {
-        for (Sapien c : sapienSystem) {
+        for (Sapien c : sapiens) {
             c.testMove();
         }
     }
@@ -135,7 +136,7 @@ public class SapienSystem {
      * draw each living object in the system
      */
     public void draw() {
-        for (Sapien c : sapienSystem) {
+        for (Sapien c : sapiens) {
             if (!c.isDead())
                 c.draw();
         }
@@ -146,8 +147,8 @@ public class SapienSystem {
      * flags
      */
     public void setContactFlag() {
-        for (Sapien c : sapienSystem) {
-            c.setContactFlag(sapienSystem);
+        for (Sapien c : sapiens) {
+            c.setContactFlag(sapiens);
         }
     }
 
@@ -158,7 +159,7 @@ public class SapienSystem {
      */
     public int getExposedCount() {
         int exposedCount = 0;
-        for (Sapien c : sapienSystem) {
+        for (Sapien c : sapiens) {
             if (c.isExposed() && c.getClass() == Human.class)
                 exposedCount++;
         }
@@ -166,8 +167,8 @@ public class SapienSystem {
     }
 
     public void testActionOnContact(String action) {
-        for (int i = sapienSystem.size() - 1; i >= 0; i--) {
-            Sapien c = sapienSystem.get(i);
+        for (int i = sapiens.size() - 1; i >= 0; i--) {
+            Sapien c = sapiens.get(i);
             switch (action) {
                 case "DIE":
                     if (c.isExposed() && c.getClass() == Human.class)
@@ -179,8 +180,8 @@ public class SapienSystem {
                     break;
                 case "CARRIER":
                     if (c.isExposed() && c.getClass() == Human.class) {
-                        sapienSystem.add(new Zombie(sketch, c.getX(), c.getY(), c.getDiameter()));
-                        sapienSystem.remove(i);
+                        sapiens.add(new Zombie(sketch, c.getX(), c.getY(), c.getDiameter()));
+                        sapiens.remove(i);
                     }
                     break;
             }
@@ -188,11 +189,11 @@ public class SapienSystem {
     }
 
     // public void actionOnContact() {
-    // for (Sapien s : sapienSystem) {
+    // for (Sapien s : sapiens) {
     // if (s.getClass() == Human.class) {
-    // for (int i = sapienSystem.size() - 1; i >= 0; i--) {
-    // if (sapienSystem.get(i).getClass() == Zombie.class) {
-    // sapienSystem.remove(i);
+    // for (int i = sapiens.size() - 1; i >= 0; i--) {
+    // if (sapiens.get(i).getClass() == Zombie.class) {
+    // sapiens.remove(i);
     // }
     // }
     // }
@@ -200,15 +201,19 @@ public class SapienSystem {
     // }
 
     public void actionOnContact() {
-        for (int i = 0; i < sapienSystem.size(); i++) {
-            if (sapienSystem.get(i).getClass() == Human.class) {
-                for (int j = sapienSystem.size() - 1; j >= 0; j--) {
-                    if (sapienSystem.get(j).getClass() == Zombie.class) {
-                        if (sapienSystem.get(i).isTouching(sapienSystem.get(j))) {
-                            if (sapienSystem.get(i).isLarger())
-                                sapienSystem.remove(j);
-                            else
-                                sapienSystem.remove(i);
+        for (int i = 0; i < sapiens.size(); i++) {
+            if (sapiens.get(i).getClass() == Human.class) {
+                for (int j = sapiens.size() - 1; j >= 0; j--) {
+                    if (sapiens.get(j).getClass() == Zombie.class) {
+                        if (sapiens.get(i).isTouching(sapiens.get(j))) {
+                            if (sapiens.get(i).isLarger(sapiens.get(j))) {
+                                Sapien z = sapiens.get(j);
+                                ParticleSystem p = new ParticleSystem(z.getX(), z.getY(), z.getDiameter() * 10, sketch);
+                                p.draw();
+                                p.update();
+                                sapiens.remove(j);
+                            } else
+                                sapiens.remove(i);
                         }
                     }
                 }
