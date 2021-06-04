@@ -244,12 +244,8 @@ public abstract class Sapien {
      * 
      * @return true if the object is larger
      */
-    public boolean isLarger() {
-        if (diameter > contactWith.getDiameter()) {
-            return true;
-        } else {
-            return false;
-        }
+    public boolean isLarger(Sapien s) {
+        return (diameter > s.getDiameter());
     }
 
     /**

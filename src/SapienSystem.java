@@ -205,7 +205,10 @@ public class SapienSystem {
                 for (int j = sapienSystem.size() - 1; j >= 0; j--) {
                     if (sapienSystem.get(j).getClass() == Zombie.class) {
                         if (sapienSystem.get(i).isTouching(sapienSystem.get(j))) {
-                            sapienSystem.remove(j);
+                            if (sapienSystem.get(i).isLarger())
+                                sapienSystem.remove(j);
+                            else
+                                sapienSystem.remove(i);
                         }
                     }
                 }
