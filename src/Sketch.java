@@ -4,10 +4,10 @@ import processing.core.PApplet;
  * Sketch class implements methods from processing applet class
  */
 public class Sketch extends PApplet {
-    private int WINDOW_X;
-    private int WINDOW_Y;
+    private int windowX;
+    private int windowY;
     private int BACKGROUND_COLOR = 100;
-    private boolean TEST_MODE;
+    private boolean testMode;
     SimController simController;
     TestController testController;
 
@@ -17,12 +17,12 @@ public class Sketch extends PApplet {
     @Override
     public void settings() {
         setTestMode(true);
-        if (TEST_MODE) {
+        if (testMode) {
             setWindowSize(600, 600);
         } else {
             setWindowSize(1000, 600);
         }
-        size(WINDOW_X, WINDOW_Y);
+        size(windowX, windowY);
     }
 
     /**
@@ -31,7 +31,7 @@ public class Sketch extends PApplet {
     @Override
     public void setup() {
         background(BACKGROUND_COLOR);
-        if (TEST_MODE) {
+        if (testMode) {
             System.out.println("**TEST MODE IS ACTIVE**");
             frameRate(4);
             testController = new TestController(this);
@@ -48,7 +48,7 @@ public class Sketch extends PApplet {
     @Override
     public void draw() {
         background(BACKGROUND_COLOR);
-        if (TEST_MODE) {
+        if (testMode) {
             testController.testSimulation();
             // testController.runModel(25, 50, 25); // (death rate, incubation rate,
             // resistance rate)
@@ -60,20 +60,20 @@ public class Sketch extends PApplet {
     /**
      * control the mode
      * 
-     * @param TEST_MODE
+     * @param testMode
      */
-    public void setTestMode(boolean TEST_MODE) {
-        this.TEST_MODE = TEST_MODE;
+    public void setTestMode(boolean testMode) {
+        this.testMode = testMode;
     }
 
     /**
      * set window size in sketch
      * 
-     * @param WINDOW_X
-     * @param WINDOW_Y
+     * @param windowX
+     * @param windowY
      */
-    public void setWindowSize(int WINDOW_X, int WINDOW_Y) {
-        this.WINDOW_X = WINDOW_X;
-        this.WINDOW_Y = WINDOW_Y;
+    public void setWindowSize(int windowX, int windowY) {
+        this.windowX = windowX;
+        this.windowY = windowY;
     }
 }

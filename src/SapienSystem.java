@@ -1,7 +1,4 @@
 import java.util.ArrayList;
-
-import javax.swing.event.CaretListener;
-
 import processing.core.PApplet;
 
 /**

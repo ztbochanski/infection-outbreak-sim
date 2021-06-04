@@ -25,7 +25,7 @@ public class TestController {
         SapienSystem.setContactFlag();
         SapienSystem.testMove();
         SapienSystem.draw();
-        SapienSystem.testActionOnContact("DIE"); // DIE, IMMUNE, CARRIER
+        // SapienSystem.testActionOnContact("DIE"); // DIE, IMMUNE, CARRIER
     }
 
     public void runModel(float deathRate, float incubationRate, float resistanceRate) {
