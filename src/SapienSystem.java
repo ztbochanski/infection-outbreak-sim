@@ -187,9 +187,29 @@ public class SapienSystem {
         }
     }
 
+    // public void actionOnContact() {
+    // for (Sapien s : sapienSystem) {
+    // if (s.getClass() == Human.class) {
+    // for (int i = sapienSystem.size() - 1; i >= 0; i--) {
+    // if (sapienSystem.get(i).getClass() == Zombie.class) {
+    // sapienSystem.remove(i);
+    // }
+    // }
+    // }
+    // }
+    // }
+
     public void actionOnContact() {
-        for (Sapien s : sapienSystem) {
-            s.draw();
+        for (int i = 0; i < sapienSystem.size(); i++) {
+            if (sapienSystem.get(i).getClass() == Human.class) {
+                for (int j = sapienSystem.size() - 1; j >= 0; j--) {
+                    if (sapienSystem.get(j).getClass() == Zombie.class) {
+                        if (sapienSystem.get(i).isTouching(sapienSystem.get(j))) {
+                            sapienSystem.remove(j);
+                        }
+                    }
+                }
+            }
         }
     }
 
