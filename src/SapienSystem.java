@@ -203,7 +203,7 @@ public class SapienSystem {
                 for (int j = sapiens.size() - 1; j >= 0; j--) {
                     if (sapiens.get(j).getClass() == Zombie.class) {
                         if (sapiens.get(i).isTouching(sapiens.get(j))) {
-                            if (sapiens.get(i).isLarger(sapiens.get(j))) {
+                            if (sapiens.get(i).defeats(sapiens.get(j))) {
                                 Sapien z = sapiens.get(j);
                                 ParticleSystem p = new ParticleSystem(z.getX(), z.getY(), z.getDiameter() * 2, sketch);
                                 particleSystems.add(p);
