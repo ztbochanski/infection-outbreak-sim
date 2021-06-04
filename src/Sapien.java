@@ -249,7 +249,12 @@ public abstract class Sapien {
     }
 
     public boolean defeats(Sapien s) {
-        return (isLarger(s));
+        int randNum = (int) sketch.random(0, 100);
+        if (randNum < 75) {
+            return (isLarger(s));
+        } else
+            return false;
+
     }
 
     /**
