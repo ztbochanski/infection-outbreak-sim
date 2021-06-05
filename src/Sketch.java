@@ -16,7 +16,7 @@ public class Sketch extends PApplet {
      */
     @Override
     public void settings() {
-        setTestMode(true);
+        setTestMode(false);
         if (testMode) {
             setWindowSize(600, 600);
         } else {
@@ -33,7 +33,6 @@ public class Sketch extends PApplet {
         background(BACKGROUND_COLOR);
         if (testMode) {
             System.out.println("**TEST MODE IS ACTIVE**");
-            // frameRate(5);
             testController = new TestController(this);
             testController.createTestSample();
         } else {

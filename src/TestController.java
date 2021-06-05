@@ -30,17 +30,4 @@ public class TestController {
         sapienSystem.testMove();
         sapienSystem.draw();
     }
-
-    public void runModel(float deathRate, float incubationRate, float resistanceRate) {
-        int exposedCount = 5;
-        if (exposedCount > 0) {
-            int deathCount = (int) (exposedCount * (deathRate / 100));
-            int carrierCount = (int) (exposedCount * (incubationRate / 100));
-            int immuneCount = (int) (exposedCount * (resistanceRate / 100));
-            // sapienSystem.applyDeathCount(deathCount);
-            // sapienSystem.applyCarrierCount(deathCount);
-            // sapienSystem.applyImmuneCount(deathCount);
-        }
-    }
-
 }

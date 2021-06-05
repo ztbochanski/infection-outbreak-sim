@@ -8,6 +8,8 @@ public class SapienSystem {
     PApplet sketch;
     private ArrayList<Sapien> sapiens;
     private ArrayList<ParticleSystem> particleSystems;
+    private String SOUND = "src/sounds/laser.mp3";
+    private SoundPlayer soundPlayer;
 
     /**
      * SapienSystem constructor creates and array list to store sapien objects
@@ -16,6 +18,7 @@ public class SapienSystem {
         this.sketch = sketch;
         this.sapiens = new ArrayList<Sapien>();
         this.particleSystems = new ArrayList<ParticleSystem>();
+        this.soundPlayer = new SoundPlayer(sketch, SOUND);
     }
 
     /**
@@ -136,14 +139,16 @@ public class SapienSystem {
                         if (h.isTouching(z)) {
                             if (h.isLarger(z) && h.isWinning(75)) {
                                 createExplosion(z);
+                                soundPlayer.playSound();
                                 sapiens.remove(j);
                             } else {
                                 if (h.isInfected(15)) {
                                     sapiens.add(new Zombie(sketch, h.getX(), h.getY(), h.getDiameter()));
+                                    sapiens.remove(h);
                                 } else {
-                                    createExplosion(h);
+                                    sapiens.remove(h);
                                 }
-                                sapiens.remove(h);
+
                             }
                         }
                     }
@@ -158,7 +163,7 @@ public class SapienSystem {
      * @param s object position to create for
      */
     public void createExplosion(Sapien s) {
-        ParticleSystem p = new ParticleSystem(s.getX(), s.getY(), s.getDiameter() * 2, sketch);
+        ParticleSystem p = new ParticleSystem(s.getX(), s.getY(), s.getDiameter(), sketch);
         particleSystems.add(p);
     }
 
