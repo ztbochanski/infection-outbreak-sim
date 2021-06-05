@@ -30,30 +30,30 @@ public class SapienSystem {
     /**
      * add object to system
      * 
-     * @param c object
+     * @param s object
      */
-    public void addSapien(Sapien c) {
-        sapiens.add(c);
+    public void addSapien(Sapien s) {
+        sapiens.add(s);
     }
 
     /**
      * get index of object passed in
      * 
-     * @param c
+     * @param s
      * @return index
      */
-    public int getIndexOf(Sapien c) {
-        return sapiens.indexOf(c);
+    public int getIndexOf(Sapien s) {
+        return sapiens.indexOf(s);
     }
 
     /**
      * set object in array at passed in index
      * 
      * @param index
-     * @param c
+     * @param s
      */
-    public void setSapienAt(int index, Sapien c) {
-        sapiens.set(index, c);
+    public void setSapienAt(int index, Sapien s) {
+        sapiens.set(index, s);
     }
 
     /**
@@ -96,8 +96,8 @@ public class SapienSystem {
      * move each object in the system
      */
     public void move() {
-        for (Sapien c : sapiens) {
-            c.move();
+        for (Sapien s : sapiens) {
+            s.move();
         }
     }
 
@@ -105,8 +105,8 @@ public class SapienSystem {
      * move each object in the system with constant motion
      */
     public void testMove() {
-        for (Sapien c : sapiens) {
-            c.testMove();
+        for (Sapien s : sapiens) {
+            s.testMove();
         }
     }
 
@@ -114,8 +114,8 @@ public class SapienSystem {
      * draw each living object in the system
      */
     public void draw() {
-        for (Sapien c : sapiens) {
-            c.draw();
+        for (Sapien s : sapiens) {
+            s.draw();
         }
     }
 
