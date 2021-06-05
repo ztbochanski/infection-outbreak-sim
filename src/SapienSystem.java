@@ -37,25 +37,6 @@ public class SapienSystem {
     }
 
     /**
-     * remove object at index
-     * 
-     * @param index
-     */
-    public void removeSapien(int index) {
-        sapiens.remove(index);
-    }
-
-    /**
-     * get object at index
-     * 
-     * @param index
-     * @return
-     */
-    public Sapien getSapien(int index) {
-        return sapiens.get(index);
-    }
-
-    /**
      * get index of object passed in
      * 
      * @param c
@@ -138,6 +119,9 @@ public class SapienSystem {
         }
     }
 
+    /**
+     * defend, die, or get infected logic on contact with carrier of disease
+     */
     public void actionOnContact() {
         for (int i = 0; i < sapiens.size(); i++) {
             Sapien h = sapiens.get(i);
@@ -168,17 +152,28 @@ public class SapienSystem {
         }
     }
 
+    /**
+     * make new particle system for explosion
+     * 
+     * @param s object position to create for
+     */
     public void createExplosion(Sapien s) {
         ParticleSystem p = new ParticleSystem(s.getX(), s.getY(), s.getDiameter() * 2, sketch);
         particleSystems.add(p);
     }
 
+    /**
+     * update the particle system
+     */
     public void updateParticles() {
         for (ParticleSystem p : particleSystems) {
             p.update();
         }
     }
 
+    /**
+     * draw particle system position
+     */
     public void drawParticles() {
         for (ParticleSystem p : particleSystems) {
             p.draw();
