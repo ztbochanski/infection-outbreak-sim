@@ -209,12 +209,13 @@ public class SapienSystem {
                     // if zombie at j, and touching human, and human won
                     if (z.getClass() == Zombie.class) {
                         if (h.isTouching(z)) {
-                            if (h.isWinning(z)) {
+                            if (h.isLarger(z) && h.isWinning(z)) {
                                 ParticleSystem p = new ParticleSystem(z.getX(), z.getY(), z.getDiameter() * 2, sketch);
                                 particleSystems.add(p);
                                 sapiens.remove(j);
-                            } else
+                            } else {
                                 sapiens.remove(h);
+                            }
                         }
 
                     } else { // human lost, zombie won
