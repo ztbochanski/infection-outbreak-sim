@@ -217,12 +217,6 @@ public class SapienSystem {
                                 sapiens.remove(h);
                             }
                         }
-
-                    } else { // human lost, zombie won
-                        // ParticleSystem p = new ParticleSystem(h.getX(), h.getY(), h.getDiameter() *
-                        // 2, sketch);
-                        // particleSystems.add(p);
-
                     }
                 }
             }

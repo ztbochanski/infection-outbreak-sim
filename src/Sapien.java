@@ -245,7 +245,7 @@ public abstract class Sapien {
      * @return true if the object is larger
      */
     public boolean isLarger(Sapien s) {
-        return (this.diameter > s.getDiameter());
+        return (this.diameter >= s.getDiameter());
     }
 
     public boolean isWinning(Sapien s) {
