@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import processing.core.PApplet;
 
 /**
@@ -6,8 +5,6 @@ import processing.core.PApplet;
  */
 public abstract class Sapien {
     private PApplet sketch;
-    private ParticleSystem p;
-    private Sapien contactWith;
     private int x, y;
     private int diameter;
     private int color;
@@ -29,19 +26,16 @@ public abstract class Sapien {
     }
 
     /**
-     * Constructor takes the PApplet object and a position x and y
+     * Constructor takes the PApplet object and a position x, y, and diameter
      * 
      * @param sketch
      * @param x
      * @param y
+     * @param diameter
      */
     public Sapien(PApplet sketch, int x, int y, int diameter) {
-        this.sketch = sketch;
-        this.x = x;
-        this.y = y;
+        this(sketch, x, y);
         this.diameter = diameter;
-        this.color = 0;
-
     }
 
     /**
