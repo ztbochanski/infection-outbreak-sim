@@ -248,9 +248,14 @@ public abstract class Sapien {
         return (this.diameter >= s.getDiameter());
     }
 
-    public boolean isWinning(Sapien s) {
+    public boolean isWinning(int probability) {
         int randNum = (int) sketch.random(0, 100);
-        return (randNum < 75);
+        return (randNum < probability);
+    }
+
+    public boolean isInfected(int probability) {
+        int randNum = (int) sketch.random(0, 100);
+        return (randNum < probability);
     }
 
     /**

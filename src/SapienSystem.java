@@ -163,40 +163,6 @@ public class SapienSystem {
         return exposedCount;
     }
 
-    public void testActionOnContact(String action) {
-        for (int i = sapiens.size() - 1; i >= 0; i--) {
-            Sapien c = sapiens.get(i);
-            switch (action) {
-                case "DIE":
-                    if (c.isExposed() && c.getClass() == Human.class)
-                        c.die();
-                    break;
-                case "IMMUNE":
-                    if (c.isExposed() && c.getClass() == Human.class)
-                        c.defend();
-                    break;
-                case "CARRIER":
-                    if (c.isExposed() && c.getClass() == Human.class) {
-                        sapiens.add(new Zombie(sketch, c.getX(), c.getY(), c.getDiameter()));
-                        sapiens.remove(i);
-                    }
-                    break;
-            }
-        }
-    }
-
-    // public void actionOnContact() {
-    // for (Sapien s : sapiens) {
-    // if (s.getClass() == Human.class) {
-    // for (int i = sapiens.size() - 1; i >= 0; i--) {
-    // if (sapiens.get(i).getClass() == Zombie.class) {
-    // sapiens.remove(i);
-    // }
-    // }
-    // }
-    // }
-    // }
-
     public void actionOnContact() {
         for (int i = 0; i < sapiens.size(); i++) {
             Sapien h = sapiens.get(i);
@@ -209,11 +175,15 @@ public class SapienSystem {
                     // if zombie at j, and touching human, and human won
                     if (z.getClass() == Zombie.class) {
                         if (h.isTouching(z)) {
-                            if (h.isLarger(z) && h.isWinning(z)) {
+                            if (h.isLarger(z) && h.isWinning(75)) {
                                 createExplosion(z);
                                 sapiens.remove(j);
                             } else {
-                                createExplosion(h);
+                                if (h.isInfected(15)) {
+                                    sapiens.add(new Zombie(sketch, h.getX(), h.getY(), h.getDiameter()));
+                                } else {
+                                    createExplosion(h);
+                                }
                                 sapiens.remove(h);
                             }
                         }
