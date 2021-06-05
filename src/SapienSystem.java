@@ -214,6 +214,8 @@ public class SapienSystem {
                                 particleSystems.add(p);
                                 sapiens.remove(j);
                             } else {
+                                ParticleSystem p = new ParticleSystem(h.getX(), h.getY(), h.getDiameter() * 2, sketch);
+                                particleSystems.add(p);
                                 sapiens.remove(h);
                             }
                         }

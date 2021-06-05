@@ -250,7 +250,7 @@ public abstract class Sapien {
 
     public boolean isWinning(Sapien s) {
         int randNum = (int) sketch.random(0, 100);
-        return (randNum < 20);
+        return (randNum < 75);
     }
 
     /**
