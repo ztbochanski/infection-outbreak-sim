@@ -134,33 +134,8 @@ public class SapienSystem {
      */
     public void draw() {
         for (Sapien c : sapiens) {
-            if (!c.isDead())
-                c.draw();
+            c.draw();
         }
-    }
-
-    /**
-     * for every frame check contact among each object in the array, set object
-     * flags
-     */
-    public void setContactFlag() {
-        for (Sapien c : sapiens) {
-            c.setContactFlag(sapiens);
-        }
-    }
-
-    /**
-     * get the number who were exposed to the infection each step
-     * 
-     * @return number of exposed objects
-     */
-    public int getExposedCount() {
-        int exposedCount = 0;
-        for (Sapien c : sapiens) {
-            if (c.isExposed() && c.getClass() == Human.class)
-                exposedCount++;
-        }
-        return exposedCount;
     }
 
     public void actionOnContact() {

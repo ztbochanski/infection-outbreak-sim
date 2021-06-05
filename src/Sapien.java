@@ -11,8 +11,6 @@ public abstract class Sapien {
     private int x, y;
     private int diameter;
     private int color;
-    private boolean isExposed;
-    private boolean isDead;
 
     /**
      * Constructor takes the PApplet object and a position x and y
@@ -27,8 +25,6 @@ public abstract class Sapien {
         this.y = y;
         this.diameter = (int) this.sketch.random(10, 40);
         this.color = 0;
-        this.isExposed = false;
-        this.isDead = false;
 
     }
 
@@ -45,8 +41,6 @@ public abstract class Sapien {
         this.y = y;
         this.diameter = diameter;
         this.color = 0;
-        this.isExposed = false;
-        this.isDead = false;
 
     }
 
@@ -139,97 +133,6 @@ public abstract class Sapien {
     }
 
     /**
-     * check object state
-     * 
-     * @return isDead true or false
-     */
-    public boolean isDead() {
-        return this.isDead;
-    }
-
-    /**
-     * set object state true or false
-     * 
-     * @param isDead
-     */
-    public void setDead(boolean isDead) {
-        this.isDead = isDead;
-    }
-
-    /**
-     * explode behavior
-     */
-    public void explode() {
-        p.draw();
-        p.update();
-    }
-
-    /**
-     * set dead state to true, use effect
-     */
-    public void die() {
-        explode();
-        isDead = true;
-    }
-
-    /**
-     * call die method on object that came in contact.
-     */
-    public void defend() {
-        contactWith.die();
-    }
-
-    /**
-     * explosion using particle system
-     * 
-     * @param x
-     * @param y
-     * @param sketch
-     */
-    public void createExplosion(int x, int y, PApplet sketch) {
-        this.p = new ParticleSystem(x, y, 50, sketch);
-    }
-
-    /**
-     * set the object that this one made contact with
-     * 
-     * @param c the object
-     */
-    public void setContactWith(Sapien c) {
-        this.contactWith = c;
-    }
-
-    /**
-     * get obj that this one made contact with
-     * 
-     * @return Sapien object that made contact
-     */
-    public Sapien getContactWith() {
-        return this.contactWith;
-    }
-
-    /**
-     * has the object made contact and exposed to infected from a different class
-     * 
-     * @return true if object exposed to the infection
-     */
-    public boolean isExposed() {
-        return this.isExposed;
-    }
-
-    /**
-     * distance formula calculates distance between two points on the cartesian
-     * plane
-     * 
-     * @param c object to compare to this
-     * @return distance
-     */
-    public double getDistance(Sapien c) {
-        return Math.sqrt(Math.pow((c.getX() - x), 2) + Math.pow((c.getY() - y), 2))
-                - ((diameter / 2) + (c.getDiameter() / 2));
-    }
-
-    /**
      * check to see if object are touching using the distance formula
      * 
      * @param c the other object
@@ -248,29 +151,25 @@ public abstract class Sapien {
         return (this.diameter >= s.getDiameter());
     }
 
+    /**
+     * is winning takes integer as prob to return t/f
+     * 
+     * @param probability
+     * @return
+     */
     public boolean isWinning(int probability) {
         int randNum = (int) sketch.random(0, 100);
         return (randNum < probability);
     }
 
+    /**
+     * is infected determines the prob of the infection
+     * 
+     * @param probability
+     * @return
+     */
     public boolean isInfected(int probability) {
         int randNum = (int) sketch.random(0, 100);
         return (randNum < probability);
-    }
-
-    /**
-     * set the state on this object regarding contact
-     * 
-     * @param SapienSystem all objects to check
-     */
-    public void setContactFlag(ArrayList<Sapien> SapienSystem) {
-        for (Sapien c : SapienSystem) {
-            // if(touching && !same class && not itself && !contact flag)
-            if (getDistance(c) < 0 && c.getClass() != this.getClass() && c != this && !isExposed) {
-                isExposed = true;
-                setContactWith(c);
-                createExplosion(x, y, sketch);
-            }
-        }
     }
 }

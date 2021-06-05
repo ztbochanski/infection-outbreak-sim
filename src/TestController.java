@@ -32,7 +32,7 @@ public class TestController {
     }
 
     public void runModel(float deathRate, float incubationRate, float resistanceRate) {
-        int exposedCount = sapienSystem.getExposedCount();
+        int exposedCount = 5;
         if (exposedCount > 0) {
             int deathCount = (int) (exposedCount * (deathRate / 100));
             int carrierCount = (int) (exposedCount * (incubationRate / 100));
