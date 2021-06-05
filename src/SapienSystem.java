@@ -210,12 +210,10 @@ public class SapienSystem {
                     if (z.getClass() == Zombie.class) {
                         if (h.isTouching(z)) {
                             if (h.isLarger(z) && h.isWinning(z)) {
-                                ParticleSystem p = new ParticleSystem(z.getX(), z.getY(), z.getDiameter() * 2, sketch);
-                                particleSystems.add(p);
+                                createExplosion(z);
                                 sapiens.remove(j);
                             } else {
-                                ParticleSystem p = new ParticleSystem(h.getX(), h.getY(), h.getDiameter() * 2, sketch);
-                                particleSystems.add(p);
+                                createExplosion(h);
                                 sapiens.remove(h);
                             }
                         }
@@ -229,6 +227,11 @@ public class SapienSystem {
                 }
             }
         }
+    }
+
+    public void createExplosion(Sapien s) {
+        ParticleSystem p = new ParticleSystem(s.getX(), s.getY(), s.getDiameter() * 2, sketch);
+        particleSystems.add(p);
     }
 
     public void updateParticles() {
