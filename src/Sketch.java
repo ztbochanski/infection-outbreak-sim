@@ -37,7 +37,7 @@ public class Sketch extends PApplet {
             testController.createTestSample();
         } else {
             simController = new SimController(this);
-            simController.createSample(400, 50); // (pop size, percentage infected)
+            simController.createSample(300);
         }
     }
 

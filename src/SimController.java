@@ -15,18 +15,31 @@ public class SimController {
     /**
      * generate a population of zombies and humans
      */
-    public void createSample(float popSize, float zombiePercentage) {
-        int totalCount = 0;
-        float targetZombiePop = (popSize * (zombiePercentage / 100));
-        while (totalCount < popSize) {
-            if (totalCount < targetZombiePop) {
-                sapienSystem.addRandZombie();
-                totalCount++;
-            } else {
-                sapienSystem.addRandHuman();
-                totalCount++;
-            }
+    public void createSample(int sampleSize) {
+        int randNum = (int) sketch.random(0, 100);
+        if (randNum < 33)
+            generatePopulation(sampleSize, 25);
+        else if (randNum < 66)
+            generatePopulation(sampleSize, 50);
+        else
+            generatePopulation(sampleSize, 50);
+
+    }
+
+    public void generatePopulation(int sampleSize, int probZombie) {
+        int count = 0;
+        while (count < sampleSize) {
+            int randNum = (int) sketch.random(0, 100);
+            generateIndividual(randNum, probZombie);
+            count++;
         }
+    }
+
+    public void generateIndividual(int randNum, int probability) {
+        if (randNum < probability)
+            sapienSystem.addRandZombie();
+        else
+            sapienSystem.addRandHuman();
     }
 
     /**

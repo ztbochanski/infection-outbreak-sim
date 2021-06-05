@@ -145,10 +145,7 @@ public class SapienSystem {
                                 if (h.isInfected(15)) {
                                     sapiens.add(new Zombie(sketch, h.getX(), h.getY(), h.getDiameter()));
                                     sapiens.remove(h);
-                                } else {
-                                    sapiens.remove(h);
                                 }
-
                             }
                         }
                     }
