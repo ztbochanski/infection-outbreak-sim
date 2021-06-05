@@ -199,18 +199,29 @@ public class SapienSystem {
 
     public void actionOnContact() {
         for (int i = 0; i < sapiens.size(); i++) {
-            if (sapiens.get(i).getClass() == Human.class) {
+            Sapien h = sapiens.get(i);
+
+            // if human is at i, then loop backwards and find zombies
+            if (h.getClass() == Human.class) {
                 for (int j = sapiens.size() - 1; j >= 0; j--) {
-                    if (sapiens.get(j).getClass() == Zombie.class) {
-                        if (sapiens.get(i).isTouching(sapiens.get(j))) {
-                            if (sapiens.get(i).defeats(sapiens.get(j))) {
-                                Sapien z = sapiens.get(j);
+                    Sapien z = sapiens.get(j);
+
+                    // if zombie at j, and touching human, and human won
+                    if (z.getClass() == Zombie.class) {
+                        if (h.isTouching(z)) {
+                            if (h.isWinning(z)) {
                                 ParticleSystem p = new ParticleSystem(z.getX(), z.getY(), z.getDiameter() * 2, sketch);
                                 particleSystems.add(p);
                                 sapiens.remove(j);
                             } else
-                                sapiens.remove(i);
+                                sapiens.remove(h);
                         }
+
+                    } else { // human lost, zombie won
+                        // ParticleSystem p = new ParticleSystem(h.getX(), h.getY(), h.getDiameter() *
+                        // 2, sketch);
+                        // particleSystems.add(p);
+
                     }
                 }
             }

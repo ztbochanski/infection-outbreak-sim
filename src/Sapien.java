@@ -248,10 +248,10 @@ public abstract class Sapien {
         return (this.diameter > s.getDiameter());
     }
 
-    public boolean defeats(Sapien s) {
+    public boolean isWinning(Sapien s) {
         int randNum = (int) sketch.random(0, 100);
-        if (randNum < 75) {
-            return (isLarger(s));
+        if (this.isLarger(s)) {
+            return (randNum < 75);
         } else
             return false;
 

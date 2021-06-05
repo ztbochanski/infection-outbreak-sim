@@ -33,7 +33,7 @@ public class Sketch extends PApplet {
         background(BACKGROUND_COLOR);
         if (testMode) {
             System.out.println("**TEST MODE IS ACTIVE**");
-            // frameRate(4);
+            // frameRate(5);
             testController = new TestController(this);
             testController.createTestSample();
         } else {
