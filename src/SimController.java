@@ -6,10 +6,13 @@ import processing.core.PApplet;
 public class SimController {
     SapienSystem sapienSystem;
     PApplet sketch;
+    Counter counter;
 
     public SimController(PApplet sketch) {
         this.sketch = sketch;
         sapienSystem = new SapienSystem(this.sketch);
+        counter = new Counter(this.sketch);
+
     }
 
     /**
@@ -22,7 +25,7 @@ public class SimController {
         else if (randNum < 66)
             generatePopulation(sampleSize, 50);
         else
-            generatePopulation(sampleSize, 50);
+            generatePopulation(sampleSize, 75);
 
     }
 
@@ -46,6 +49,9 @@ public class SimController {
      * move each member of the system to their next position and simulate model
      */
     public void simulate() {
+        counter.setHumanCount(sapienSystem.getHumanCount());
+        counter.setZombieCount(sapienSystem.getZombieCount());
+        counter.draw();
         sapienSystem.actionOnContact();
         sapienSystem.drawParticles();
         sapienSystem.updateParticles();
