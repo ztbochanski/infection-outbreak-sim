@@ -22,12 +22,31 @@ public class SapienSystem {
     }
 
     /**
-     * get size of the system
+     * get count of the human system
      * 
      * @return size
      */
-    public int getSize() {
-        return sapiens.size();
+    public int getHumanCount() {
+        int count = 0;
+        for (Sapien s : sapiens) {
+            if (s instanceof Human)
+                count++;
+        }
+        return count;
+    }
+
+    /**
+     * get count of the zombie system
+     * 
+     * @return size
+     */
+    public int getZombieCount() {
+        int count = 0;
+        for (Sapien s : sapiens) {
+            if (s instanceof Zombie)
+                count++;
+        }
+        return count;
     }
 
     /**
